@@ -1,0 +1,18 @@
+.Sidebar
+  - if user_signed_in?
+    .Sidebar__status.hidden-xs.hidden-sm
+      = render 'share/users/status'
+  .Sidebar__title
+    h4
+      | 人気な掲示板
+  .Sidebar__list
+    - @ranked_rooms.each.with_index(1) do |room, i|
+      = link_to chat_room_path(room), class: "Sidebar__lesson", onClick: "gtag('event', 'click', {'event_category': 'sidebar', 'event_label': 'room_ranking'});" do
+        span.badge.Sidebar__badge
+          = i
+        p.Sidebar__link
+          = room.title
+        p.Sidebar__text.text-right
+          i.glyphicon.glyphicon-pencil
+          | &nbsp;
+          = room.posts.count

@@ -1,0 +1,36 @@
+.Signup
+  .Signup__block
+    .row.mNone
+      .col-sm-5.col-xs-12.pNone
+        - back_link = session[:previous_url].present? ? session[:previous_url] : root_path
+        = link_to '<< 前の画面に戻る', back_link, class: "Signup__back", onClick: "gtag('event', 'click', {'event_category': 'registraion', 'event_label': 'to_previous_page'});"
+        ul.Signup__list
+          li
+            | 授業のレビューを書いたり、見たり。
+          li
+            | シラバスをサクサク検索。
+          li
+            | 全部無料です。
+      .col-sm-6.col-xs-12.col-sm-offset-1.pNone
+        .row.mNone
+          .col-md-8.col-xs-10.col-xs-offset-1
+            p.Signup__title
+              | 立教生の5人に1人が使ってる！
+            .mT30
+              p.Signup__subtitle
+                | Repをはじめよう
+              = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+                = devise_error_messages!
+                .field.form-group
+                  = f.text_field :email, autofocus: true, class: 'Signup__form Signup__form--email', placeholder: '学籍番号'
+                  span.Signup__helptext
+                    | @rikkyo.ac.jp
+                .field.form-group
+                  = f.password_field :password, autocomplete: "off", class: 'Signup__form', placeholder: 'パスワード(6文字以上)'
+                .field.form-group
+                  = f.password_field :password_confirmation, autocomplete: "off", class: 'Signup__form', placeholder: 'パスワード(確認)'
+                .actions
+                  p
+                    = f.submit "登録", class: "btn btn-default btn-block", data: { disable_with: "送信中..." }, onClick: "gtag('event', 'click', {'event_category': 'registraion', 'event_label': 'create_user'});"
+              .Signup__links
+                = render "devise/shared/links"

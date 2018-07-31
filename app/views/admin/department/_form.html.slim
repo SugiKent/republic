@@ -1,0 +1,12 @@
+.row.center-block
+  .form-group.col-md-12.col-xs-12
+    label.form-label
+      | 学部名
+    = f.collection_select :faculty_id, Faculty.all, :id, :faculty_name, { include_blank: "Please select one" }, { class: "form-control" }
+  .form-group.col-md-6.col-xs-12
+    label.form-label
+      | 学科名
+    = f.text_field :department_name, class: "form-control"
+.row
+  .col-md-6.col-xs-12
+    = f.submit class: "btn btn-success"

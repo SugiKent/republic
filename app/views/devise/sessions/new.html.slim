@@ -1,0 +1,34 @@
+.container
+  .Page
+    h1.Page__title
+      | ログイン
+  .row
+    .col-sm-6.col-xs-12
+      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        p.bg-danger
+          = devise_error_messages!
+        .col-xs-12
+          .field.form-group
+            = f.label :email, '学籍番号'
+            .input-group
+              = f.text_field :email, autofocus: true, class: "form-control"
+              .input-group-addon
+                | @rikkyo.ac.jp
+
+        .col-xs-12
+          .field.form-group
+            = f.label :password, 'パスワード'
+            br
+            = f.password_field :password, autocomplete: "off", class: "form-control"
+        .col-xs-12
+          - if devise_mapping.rememberable?
+            .field.checkbox
+              label
+                = f.check_box :remember_me
+                = f.label :remember_me, '次回から自動でログインする'
+        .col-xs-12
+          .actions
+            p
+              = f.submit "ログイン", class: 'btn btn-success btn-go', data: { disable_with: "ログイン中..." }, onClick: "gtag('event', 'click', {'event_category': 'session', 'event_label': 'login_user'});"
+      .col-xs-12
+        = render "devise/shared/links"

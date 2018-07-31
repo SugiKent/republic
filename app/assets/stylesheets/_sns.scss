@@ -1,0 +1,37 @@
+@import "common/color";
+@import "common/font";
+@import "media_queries";
+
+.Sns {
+  &__btn {
+    display: block;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    color: #fff;
+    font-weight: bold;
+    line-height: 58px;
+    text-align: center;
+    transition: 0.3s;
+    box-shadow: 1px 1px 3px 0px $light-gray;
+    @include max-screen($breakpoint-tablet) {
+      width: 70px;
+      height: 40px;
+      line-height: 38px;
+      font-size: 14px;
+      border-radius: 5px;
+      margin-left: 10px;
+    }
+    &:hover {
+      text-decoration: none;
+      color: #fff;
+      opacity: 0.8;
+    }
+    &--twitter {
+      background-color: #46A1EC;
+    }
+    &--line {
+      background-color: #73C43B;
+    }
+  }
+}

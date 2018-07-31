@@ -1,0 +1,27 @@
+.container
+  h2
+    | パスワードの再設定
+  .row
+    .col-sm-6.col-xs-12
+      = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+        = devise_error_messages!
+        .col-xs-12
+          = f.hidden_field :reset_password_token
+          .field.form-group
+            = f.label :password, "新しいパスワード"
+            br
+            = f.password_field :password, autofocus: true, autocomplete: "off", class: 'form-control'
+            - if @minimum_password_length
+              p.help-block
+                = @minimum_password_length
+                | 文字以上入力してください
+        .col-xs-12
+          .field.form-group
+            = f.label :password_confirmation, "パスワード（確認）"
+            br
+            = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'
+          .actions
+            p
+              = f.submit "パスワードを変更", class: 'btn btn-danger', data: { disable_with: "送信中..." }
+      .col-xs-12
+        = render "devise/shared/links"

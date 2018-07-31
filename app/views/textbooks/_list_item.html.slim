@@ -1,0 +1,29 @@
+.col-xs-12.col-sm-4
+  .Textbook__item.LessonModule__block
+    h4.Textbook__title
+      = link_to book.title, textbook_path(book)
+    p
+      - book.lessons.each_with_index do |lesson, i|
+        - break if i > 0
+        = link_to lesson.lesson_name, lesson_path(lesson)
+      small
+        | &nbsp;など
+    table.table.Textbook__table
+      tr
+        td
+          = book.author
+        td
+          = book.publisher
+        td
+          = book.published_year
+    / - if current_user.present?
+      .row.Textbook__buttons
+        - if current_user.having_book_requests.pluck(:text_book_id).include?(book.id)
+          = link_to '登録済み', '', class: "btn btn-block btn-info", disabled: true
+        - else
+          = link_to '持ってる 👍', ship_textbooks_path(id: book, having_user: current_user), method: :post, class: "btn btn-block btn-info"
+
+        - if current_user.wanted_book_requests.pluck(:text_book_id).include?(book.id)
+          = link_to '登録済み', '', class: "btn btn-block btn-default", disabled: true
+        - else
+          = link_to '欲しい 🙏', ship_textbooks_path(id: book, request_user: current_user), method: :post, class: "btn btn-block btn-default"

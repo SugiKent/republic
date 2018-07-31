@@ -1,0 +1,32 @@
+<!-- Page hiding snippet (recommended)  -->
+<%# <style>.async-hide { opacity: 0 !important} </style>
+<script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
+h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
+(a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
+})(window,document.documentElement,'async-hide','dataLayer',500,
+{'GTM-WFRS9VD':true});</script> %>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-99999999-9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('set', {'user_id': "<%= current_user.id if current_user.present? %>"});
+</script>
+
+<script src="https://cdn.logrocket.io/LogRocket.min.js" crossorigin="anonymous"></script>
+<script>window.LogRocket && window.LogRocket.init('xxxxxx/rep');</script>
+
+<% if current_user.present? %>
+  <script type="text/javascript">
+    LogRocket.identify("<%= current_user.id %>", {
+    email: "<%= current_user.email %>",
+
+    });
+  </script>
+<% end %>
+<!-- <%= render 'share/adsense' %> -->
+
+<!-- SearchConsoleの確認用 -->
+<meta name="google-site-verification" content="JlwaDt1iuhYKjhibbf1yPC1UGgGUUyfyt()Y8HUyHkh" />

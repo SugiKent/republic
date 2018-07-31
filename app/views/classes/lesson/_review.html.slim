@@ -1,0 +1,82 @@
+- return '' if amp_ready?
+- if @results.count == 0
+  .alert.alert-info
+    | まだレビューがありません😭
+- else
+  - unless @has_result_and_first_grade
+    .alert.alert-warning
+      / | 【期間限定】全レビューを公開中！
+      | レビューを見るには、１つ以上レビューを書く必要があります。
+      br
+      | 1年生はログインすれば閲覧が可能です。
+    - if current_user.present?
+      = link_to new_lesson_result_path(@lesson), onClick: "gtag('event', 'click', {'event_category': 'lesson', 'event_label': 'blur/review'});" do
+        = image_tag "lessons/review_blur_to_review.jpeg", style: "width: 100%;height: 100%;"
+    - else
+      = link_to new_user_registration_path, onClick: "gtag('event', 'click', {'event_category': 'lesson', 'event_label': 'blur/signup'});" do
+        = image_tag "lessons/review_blur_to_signup.jpeg", style: "width: 100%;height: 100%;"
+  - else
+    .Syllabus__list
+      .row.Syllabus__row
+        .col-sm-6.col-xs-12
+          .lesson__content
+            .Syllabus__header
+              p
+                | みんなの成績
+            .Syllabus__table
+              table.table
+                tr.table-header
+                  th
+                    | S
+                  th
+                    | A
+                  th
+                    | B
+                  th
+                    | C
+                  th
+                    | D
+                tr
+                  td
+                    = @results.where(score: 4).count
+                  td
+                    = @results.where(score: 3).count
+                  td
+                    = @results.where(score: 2).count
+                  td
+                    = @results.where(score: 1).count
+                  td
+                    = @results.where(score: 0).count
+        .col-sm-6.col-xs-12
+          .lesson__content
+            .Syllabus__header
+              p
+                | みんなの評価
+            .Syllabus__table
+              table.table
+                tr
+                  th
+                    | 学びの大きさ
+                  th
+                    | 授業の簡単さ
+                  th
+                    | 単位の取りやすさ
+                tr
+                  td
+                    = @results.average(:rep_1)
+                  td
+                    = @results.average(:rep_2)
+                  td
+                    = @results.average(:rep_3)
+        .col-xs-12
+          .lesson__review
+            - if @results.map{|r| r.comment}.first.present?
+              .Syllabus__header
+                p
+                | みんなのレビュー
+              table.table.table-striped
+                - @results.select('comment').each do |r|
+                  - if r.comment.present?
+                    tr
+                      td.lesson__review-content
+                        = simple_format(h(r.comment))

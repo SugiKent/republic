@@ -1,0 +1,133 @@
+@import "common/color";
+@import "common/font";
+@import "media_queries";
+
+@mixin placeholder {
+    &:placeholder-shown {
+      @content;
+    }
+    &::-webkit-input-placeholder {
+      @content;
+    }
+    &:-moz-placeholder {
+      @content;
+      opacity: 1;
+    }
+    &::-moz-placeholder {
+      @content;
+      opacity: 1;
+    }
+    &:-ms-input-placeholder {
+      @content;
+    }
+}
+
+.Signup {
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  left: 0px;
+  background: linear-gradient(45deg, $blue, $span-red, $orange);
+  background-size: 600% 600%;
+  animation: AnimationName 10s ease infinite;
+  &__block {
+    padding-top: 15%;
+    color: #fff;
+    text-shadow: 2px 2px 2px rgba(0,0,0,0.3);
+    height: 100%;
+    overflow-y: scroll;
+    @include max-screen($breakpoint-tablet) {
+      padding-top: 20px;
+    }
+  }
+  &__back {
+    color: #fff;
+    text-decoration: underline;
+    font-size: 15px;
+    position: fixed;
+    top: 50px;
+    left: 50px;
+    @include max-screen($breakpoint-tablet) {
+      position: relative;
+      top: 0;
+      left: 0;
+      font-size: 12px;
+      display: block;
+      height: 40px;
+      margin: 0px 0px 10px 10px;
+    }
+  }
+  &__list {
+    list-style: none;
+    padding-left: 0px;
+    text-align: right;
+    @include max-screen($breakpoint-tablet) {
+      margin-bottom: 40px;
+    }
+    li {
+      font-size: 22px;
+      line-height: 60px;
+      @include max-screen($breakpoint-tablet) {
+        font-size: 18px;
+        line-height: 40px;
+      }
+      span {
+        font-weight: bold;
+      }
+    }
+  }
+  &__title {
+    font-weight: bold;
+    font-size: 30px;
+    letter-spacing: 0.1em;
+    @include max-screen($breakpoint-tablet) {
+      font-size: 25px;
+    }
+  }
+  &__subtitle {
+    font-size: 20px;
+    letter-spacing: 0.1em;
+  }
+  &__form {
+    width: 100%;
+    background-color: rgba(0,0,0,0);
+    border: 0px;
+    border-bottom: 1px solid #fff;
+    font-size: 14px;
+    line-height: 40px;
+    height: 40px;
+    @include placeholder {
+      color: rgba(255,255,255,0.8);
+      letter-spacing: 0.1em;
+      font-size: 14px;
+      line-height: 40px;
+    }
+    &:focus {
+      outline: 0;
+      height: 40px;
+      line-height: 40px;
+    }
+    &--email {
+      width: 60%;
+      display: inline-block;
+    }
+  }
+  &__helptext {
+    width: 30%;
+    display: inline-block;
+    font-size: 16px;
+  }
+  &__links {
+    a {
+      color: #fff;
+      text-decoration: underline;
+    }
+  }
+}
+
+@keyframes AnimationName {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}

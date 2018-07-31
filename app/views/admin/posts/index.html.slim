@@ -1,0 +1,33 @@
+.page-header
+  h3
+    | 掲示板管理
+.row
+  .col-xs-12
+    .table-responsive
+      table.table.table-striped
+        tr
+          th
+            | 授業名
+          th
+            | 内容
+          th
+            | 時間
+          - if current_user.admin?
+            th
+              | ユーザー
+            th
+            
+        - @posts.each do |post|
+          tr
+            td
+              = link_to post.lesson.lesson_name, admin_post_path(post.lesson)
+            td
+              = post.content
+            td
+              = post.created_at.to_s(:created_at)
+            - if current_user.admin?
+              td
+                = post.user.try(:email)
+              td
+                = link_to "削除", admin_post_path(post), method: :delete, data: { confirm: '本当に削除しますか？'}, class: "btn btn-danger"
+    = paginate @posts

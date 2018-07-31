@@ -1,0 +1,6 @@
+// 「お気に入りから削除」ボタンを押した時の挙動
+// 次に表示するのは削除ボタンなので、favorite_button_for_createをレンダリング
+// 「お気に入りに追加」のパーシャルを読み込む
+// 渡す値はlesson: Lessonのオブジェクト
+// size: ボタンの大きさ（文字列）
+$("#Favorite__button--<%= @lesson.id %>").html('<%= j(render "favorite_button_for_create", lesson: @lesson, size: "sm") %>')

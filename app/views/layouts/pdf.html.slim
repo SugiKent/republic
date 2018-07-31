@@ -1,0 +1,9 @@
+doctype html
+html
+  head
+    meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8"
+    = display_meta_tags default_meta_tags
+    = csrf_meta_tags
+    = wicked_pdf_stylesheet_link_tag 'modules/pdf/pdf'
+  body
+    = yield

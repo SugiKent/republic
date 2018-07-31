@@ -1,0 +1,132 @@
+@import "media_queries";
+
+.cf{
+	zoom:1;
+	&:after {
+		display:block;
+		visibility:hidden;
+		clear:both;
+		height:0;
+		content:".";
+	}
+}
+
+/*margin*/
+.mT5{margin-top:5px;}
+.mT10{margin-top:10px;}
+.mT15{margin-top:15px;}
+.mT20{margin-top:20px;}
+.mT24{margin-top:24px;}
+.mT30{margin-top:30px;}
+.mT40{margin-top:40px;}
+
+.mB5{margin-bottom:5px;}
+.mB10{margin-bottom:10px;}
+.mB15{margin-bottom:15px;}
+.mB20{margin-bottom:20px;}
+.mB24{margin-bottom:24px;}
+.mB25{margin-bottom:25px;}
+.mB30{margin-bottom:30px;}
+.mB40{margin-bottom: 40px;}
+.mB50{margin-bottom: 50px;}
+
+.mL5{margin-left:5px;}
+.mL10{margin-left:10px;}
+.mL15{margin-left:15px;}
+.mL20{margin-left:20px;}
+
+.mR5{margin-right:5px;}
+.mR10{margin-right:10px;}
+.mR15{margin-right:15px;}
+.mR20{margin-right:20px;}
+
+.mLR5{margin-left:5px; margin-right:5px;}
+.mLR10{margin-left:10px; margin-right:10px;}
+.mLR15{margin-left:15px; margin-right:15px;}
+.mLR20{margin-left:20px; margin-right:20px;}
+.mAuto{margin:0 auto;}
+
+/*padding*/
+.pT5{padding-top:5px;}
+.pT10{padding-top:10px;}
+.pT15{padding-top:15px;}
+.pT20{padding-top:20px;}
+.pT30{padding-top:30px;}
+
+.pB5{padding-bottom:5px;}
+.pB10{padding-bottom:10px;}
+.pB15{padding-bottom:15px;}
+.pB20{padding-bottom:20px;}
+.pB30{padding-bottom:30px;}
+.pB50{padding-bottom:50px;}
+
+.pL5{padding-left:5px;}
+.pL10{padding-left:10px;}
+.pL15{padding-left:15px;}
+.pL20{padding-left:20px;}
+
+.pR5{padding-right:5px;}
+.pR10{padding-right:10px;}
+.pR15{padding-right:15px;}
+.pR20{padding-right:20px;}
+.pLR20{padding-left:20px; padding-right:20px;}
+
+.mNone {
+	margin: 0px;
+}
+.pNone {
+	padding: 0px;
+}
+.fntN {
+  font-weight: normal;
+}
+.fnt10 {
+	font-size: 10px;
+}
+
+.curP {
+  cursor: pointer;
+}
+.text-top {
+  vertical-align: top;
+}
+
+/*******
+* width
+********/
+.width100 {
+	width: 100%;
+}
+.mw60 {
+	min-width: 60px;
+}
+
+/*******
+* iframe
+********/
+.iframe-wrap {
+  position: relative;
+  width: 100%;
+  padding-top: 120%;
+  margin-left: auto;
+  margin-right: auto;
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
+	@include max-screen($breakpoint-tablet) {
+		width: 320px !important;
+		height: 450px !important;
+	}
+}
+.iframe-wrap iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+	@include max-screen($breakpoint-tablet) {
+		width: 320px !important;
+		display: block !important;
+		max-width: 320px !important;
+		min-width: 320px !important;
+	}
+}

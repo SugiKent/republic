@@ -1,0 +1,4 @@
+- link_path = user_signed_in? ? favorite_path(favo) : none_lesson_path(lesson)
+= button_to link_path, method: :delete, class: "btn btn-default btn-#{size}", data: { disable_with: "送信中..." }, remote: true, onClick: "gtag('event', 'click', {'event_category': 'lesson', 'event_label': 'favorite/destroy'});" do
+  i.glyphicon.glyphicon-star
+  | お気に入りから削除

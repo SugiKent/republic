@@ -1,0 +1,9 @@
+.Post__contents
+  = render partial: 'posts/post_content'
+
+= form_for(@new_post, url: {controller: 'posts', action: 'create'}, remote: true) do |f|
+  .mT10
+    = f.text_area :content, id: "content_field", placeholder: t('views.post.placeholder.content'), class: "form-control"
+    = f.hidden_field :chat_room_id, value: params[:id]
+  .mT5.mB10.text-right
+    = f.submit "送信", class: "btn btn-success btn-go", data: { disable_with: '送信中' }

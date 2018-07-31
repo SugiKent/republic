@@ -1,0 +1,15 @@
+ruby:
+  searched_url = session[:search_history].last if session[:search_history].present?
+  # search_historyと今アクセスしてるURLが異なり、
+  # かつURLに"seach"という単語が含まれている時に検索結果のパンくずを出す。
+  if searched_url.present?
+    if searched_url != request.fullpath && searched_url.include?("search")
+      search = lesson_search_condition(searched_url)
+      search_link = searched_url
+      breadcrumb :result_new, @lesson
+    else
+      breadcrumb :result_new, @lesson
+    end
+  end
+
+= render 'form'

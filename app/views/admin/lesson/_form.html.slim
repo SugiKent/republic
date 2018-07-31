@@ -1,0 +1,81 @@
+.row.center-block
+  .row
+    .form-group.col-xs-6
+      label.form-label
+        | 学部名
+      = f.collection_select :faculty_id, Faculty.all, :id, :faculty_name, { include_blank: "Please select one" }, { class: "form-control" }
+    .form-group.col-xs-6
+      label.form-label
+        | 学科名
+      = f.collection_select :department_id, Department.all, :id, :department_name, { include_blank: "Please select one" }, { class: "form-control" }
+  .row
+    .form-group.col-md-6.col-xs-12
+      label.form-label
+        | 授業名
+      = f.text_field :lesson_name, class: "form-control"
+    .form-group.col-md-6.col-xs-12
+      label.form-label
+        | 担当講師名
+      = f.text_field :professor_name, class: "form-control"
+  .row
+    .form-group.col-xs-4
+      label.form-label
+        | 学期
+      = f.select :term, {"春学期"=>"1", "秋学期"=>"2", "通年"=>"3"}, {selected: @lesson.term.to_i}, include_blank: "--指定なし--", class: "form-control"
+    .form-group.col-xs-4
+      label.form-label
+        | コマ
+      = f.text_field :period, class: "form-control"
+  .row
+    .form-group.col-md-6.col-xs-12
+      label.form-label
+        | 講義ラベル
+      = f.text_field :lesson_number, class: "form-control"
+    .form-group.col-md-6.col-xs-12
+      label.form-label
+        | 講義コード
+      = f.text_field :lesson_code, class: "form-control"
+  .row
+    .form-group.col-md-6.col-xs-12
+      label.form-label
+        | キャンパス
+      = f.select :campus, {"池袋"=>"1", "新座"=>"2", "明治"=>"3"}, {selected: @lesson.campus.to_i}, include_blank: "--指定なし--", class: "form-control"
+    .form-group.col-md-6.col-xs-12
+      label.form-label
+        | 教室
+      = f.text_field :classroom, class: "form-control"
+  .row
+    .form-group.col-md-6.col-xs-12
+      label.form-label
+        | 備考
+      = f.text_field :note, class: "form-control"
+    .form-group.col-md-6.col-xs-12
+      label.form-label
+        | URL
+      = f.text_field :url, class: "form-control"
+  .row
+    .form-group.col-md-6.col-xs-12
+      label.form-label
+        | 年度
+      = f.select :year, {"2015"=>"2015", "2016"=>"2016", "2017"=>"2017", "2018"=>"2018"}, {selected: @lesson.year.to_i}, include_blank: "--指定なし--", class: "form-control"
+  
+  .row
+    .col-xs-12
+      h3
+        | 授業詳細
+  - yaml_path = "activerecord.attributes.lesson_detail"
+  - item_names = ['code_title', 'theme_subtitle', 'professor', 'term', 'credit', 'number', 'language', 'notes', 'objectives', 'content', 'outside_study', 'evaluation', 'textbook', 'reading', 'others', 'info']
+  = f.fields_for :lesson_detail do |ld|
+    .row
+      - item_names.each do |item|
+        .form-group.col-xs-6
+          label.form-label
+            = t("#{yaml_path}.#{item}")
+          - case item
+          - when 'term', 'credit', 'number', 'language'
+            = ld.text_field item, class: "form-control"
+          - else
+            = ld.text_area item, class: "form-control"
+.row
+  .col-md-6.col-xs-12
+    = f.submit class: "btn btn-success"

@@ -1,0 +1,202 @@
+- yaml_path = "activerecord.attributes.lesson_detail"
+- lesson_detail = @lesson.lesson_detail
+- if lesson_detail.present?
+  .Syllabus.mT10
+    .row
+      / *********************
+      / 基本情報
+      / *********************
+      .col-sm-6.col-xs-12
+        ul.Syllabus__list
+          - unless amp_ready?
+            - detail_items = ['code_title', 'theme_subtitle', 'professor', 'notes']
+          - else
+            - detail_items = ['code_title', 'theme_subtitle', 'professor', 'notes', 'term', 'credit', 'number', 'language']
+          - detail_items.each do |item|
+            li.Syllabus__row
+              .Syllabus__header
+                p
+                  = t("#{yaml_path}.#{item}")
+              .Syllabus__content
+                p.Syllabus__text
+                  - case item
+                  - when 'professor'
+                    = raw lesson_detail['professor'].gsub(/¥n/,'</br>')
+                  - else
+                    = lesson_detail[item].blank? ? 'ー' : lesson_detail[item]
+
+          - unless amp_ready?
+            .Syllabus__hidden.js-Syllabus__basicData
+              - detail_items = ['term', 'credit', 'number', 'language']
+              - detail_items.each do |item|
+                li.Syllabus__row
+                  .Syllabus__header
+                    p
+                      = t("#{yaml_path}.#{item}")
+                  .Syllabus__content
+                    p.Syllabus__text
+                      = lesson_detail[item]
+          - unless amp_ready?
+            .Syllabus__more
+              a.Syllabus__more--button data-target='js-Syllabus__basicData' onClick="gtag('event', 'click', {'event_category': 'lesson', 'event_label': 'show_lesson_basic_data'});" data-turbolinks="false"
+                | 単位数や科目コードなどを見る...
+
+      / *********************
+      / 成績評価基準
+      / *********************
+      .col-sm-6.col-xs-12
+        ul.Syllabus__list
+          li.Syllabus__row
+            .Syllabus__header
+              p
+                = t("#{yaml_path}.evaluation")
+            .Syllabus__table
+              - if @lesson.evaluations.present?
+                - unless amp_ready?
+                  div style="width:100%"
+                    canvas#canvas
+                table.table
+                  tr
+                    th
+                      | 種類
+                    th
+                      | 割合
+                    th
+                      | 内容
+                  - @lesson.evaluations.each do |eva|
+                    tr
+                      td
+                        = eva.kind
+                      td
+                        = eva.percent
+                        | %
+                      td
+                        = eva.content
+            - if @lesson.lesson_detail.evaluation.present?
+              .Syllabus__text
+                p
+                  = @lesson.lesson_detail.evaluation
+
+    .row
+      / *********************
+      / 授業の目標・授業の内容
+      / *********************
+      .col-sm-6.col-xs-12
+        ul.Syllabus__list
+          - detail_items = ['objectives', 'content']
+          - detail_items.each do |item|
+            li.Syllabus__row
+              .Syllabus__header
+                p
+                  = t("#{yaml_path}.#{item}")
+              .Syllabus__content
+                p.Syllabus__text
+                  = hbr lesson_detail[item]
+      / *********************
+      / 授業計画
+      / *********************
+      .col-sm-6.col-xs-12
+        ul.Syllabus__list
+          li.Syllabus__row
+            .Syllabus__header
+              p
+                = t("#{yaml_path}.schedules")
+            - @lesson.lesson_schedules.each.with_index(1) do |schedule, i|
+              - unless amp_ready?
+                - break if i > 3
+              .Syllabus__tr
+                = i
+                | .&nbsp;&nbsp;
+                = hbr schedule.content
+            .Syllabus__hidden.js-Syllabus__schedule
+              - if @lesson.lesson_schedules.present?
+                - @lesson.lesson_schedules[3..-1].each.with_index(4) do |schedule, i|
+                  .Syllabus__tr
+                    = i
+                    | .&nbsp;&nbsp;
+                    = hbr schedule.content
+              - else
+                .Syllabus__tr
+                  | この授業には授業計画情報がありません。
+            - unless amp_ready?
+              .Syllabus__more
+                a.Syllabus__more--button data-target='js-Syllabus__schedule' onClick="gtag('event', 'click', {'event_category': 'lesson', 'event_label': 'show_lesson_schedules'});" data-turbolinks="false"
+                  | 授業計画を全部見る...
+
+    / *********************
+    / テキスト・参考文献
+    / *********************
+    ul.Syllabus__list
+      - detail_items = ['textbook', 'reading']
+      - detail_items.each do |item|
+        - case item
+        - when 'textbook'
+          li.Syllabus__row
+            .Syllabus__header
+              p
+                = t("#{yaml_path}.#{item}")
+            - textbook_lessons = @lesson.text_book_lessons.where(book_type: 1)
+            = render 'textbooks', textbook_lessons: textbook_lessons
+            .Syllabus__content
+              p.Syllabus__text
+                = @lesson.lesson_detail.textbook
+        - when 'reading'
+          li.Syllabus__row
+            .Syllabus__header
+              p
+                = t("#{yaml_path}.#{item}")
+            - textbook_lessons = @lesson.text_book_lessons.where(book_type: 0)
+            = render 'textbooks', textbook_lessons: textbook_lessons
+            .Syllabus__content
+              p.Syllabus__text
+                = @lesson.lesson_detail.reading
+
+    / *********************
+    / 授業時間外学習・その他・注意事項
+    / *********************
+    ul.Syllabus__list
+      - detail_items = ['outside_study', 'others', 'info']
+      - detail_items.each do |item|
+        li.Syllabus__row
+          .Syllabus__header
+            p
+              = t("#{yaml_path}.#{item}")
+          .Syllabus__content
+            p.Syllabus__text
+              = hbr (lesson_detail[item].blank? ? 'ー' : lesson_detail[item])
+
+- unless amp_ready?
+  ruby:
+    percent = ''
+    kind = ''
+    @lesson.evaluations.each do |eva|
+      percent = percent + "#{eva.percent},"
+      kind = kind + "'#{eva.kind}',"
+    end
+
+- unless amp_ready?
+  - if @lesson.evaluations.present?
+    javascript:
+      document.addEventListener("turbolinks:load", function() {
+        var data = {
+          datasets: [{
+            data: [#{raw percent}],
+            backgroundColor: [
+              '#ff6384',
+              '#36a2eb',
+              '#cc65fe',
+              '#ffce56',
+            ]
+          }],
+          labels: [#{raw kind}]
+        };
+        var complexChartOption = {
+          responsive: true,
+        };
+        var ctx = document.getElementById("canvas");
+        var myDoughnutChart = new Chart(ctx, {
+          type: 'pie',
+          data: data,
+          options: complexChartOption
+        });
+      });

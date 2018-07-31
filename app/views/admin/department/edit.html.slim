@@ -1,0 +1,10 @@
+.page-header
+  h3
+    | 学科情報を編集
+.row
+  .col-xs-12
+    = form_for @department, :url => { :controller => :department, :action => :update } do |f|
+      = render 'form', f: f
+.row
+  .col-xs-12
+    = link_to 'Back', admin_department_index_path, class: "btn btn-default"

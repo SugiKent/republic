@@ -1,0 +1,5 @@
+= form_for @result, :url => { :controller => :result, :action => :create } do |f|
+  .row
+    .col-xs-12
+      = link_to "戻る", lesson_path(@result.lesson_id)
+  = render partial: 'formmodule', locals: { f: f }

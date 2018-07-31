@@ -1,0 +1,18 @@
+.col-xs-12.col-sm-4
+  .Textbook__item.LessonModule__block
+    h4.Textbook__title
+      = link_to book.title, admin_textbook_path(book)
+    p
+      - book.lessons.each_with_index do |lesson, i|
+        - break if i > 0
+        = link_to lesson.lesson_name, lesson_path(lesson)
+      small
+        | &nbsp;など
+    table.table.Textbook__table
+      tr
+        td
+          = book.author
+        td
+          = book.publisher
+        td
+          = book.published_year

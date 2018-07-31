@@ -1,0 +1,7 @@
+- if current_user.present?
+  - favo = favos.select { |favorite| favorite.lesson_id == lesson.id } # favosから、lesson_idが一致するFavoriteオブジェクトをfavoに代入
+  - if favo.blank? # もしfavoが空なら、「お気に入りに追加」ボタンを表示
+    = render partial: "classes/favorites/favorite_button_for_create", locals: {lesson: lesson, size: size}
+  - else
+    = render partial: "classes/favorites/favorite_button_for_destroy", locals: {favo: favo, lesson: lesson, size: size }
+- else

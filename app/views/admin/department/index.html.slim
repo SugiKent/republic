@@ -1,0 +1,28 @@
+.page-header
+  h3
+    | 学科管理
+= link_to "学部の方へ", admin_faculty_index_path, class: "btn btn-default"
+.row
+  .col-xs-12
+    .table-responsive
+      table.table.table-striped
+        tr
+          th
+            | 学科名
+          th
+            | 所属学部名
+          th
+
+          th
+
+        - @departments.each do |department|
+          tr
+            td
+              = department.department_name
+            td
+              = department.faculty.faculty_name
+            td
+              = link_to "編集", edit_admin_department_path(department), class: "btn btn-success"
+            td
+              = link_to "削除", admin_department_path(department), method: :delete, data: { confirm: '本当に削除しますか？'}, class: "btn btn-danger"
+= link_to "登録", new_admin_department_path, class: "btn btn-info"

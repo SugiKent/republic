@@ -1,0 +1,13 @@
+- breadcrumb :chat_room, @room.title
+- set_meta_tags title: "#{@room.title}の掲示板", description: "#{@room.title}の掲示板です。Repの掲示板では誰でも簡単に5秒で掲示板が作成でき、投稿も自由です。さぁ君も立教生同士のコミュニティに飛び込もう！"
+
+.Page
+  h1.Page__title
+    = @room.title
+- if @room.faculty.present?
+  p
+    i.glyphicon.glyphicon-tag
+    | &nbsp;
+    = @room.faculty.faculty_name
+
+= render 'posts'

@@ -1,0 +1,44 @@
+@import "common/color";
+@import "common/font";
+@import "media_queries";
+
+.AddHome {
+  width: 90%;
+  position: fixed;
+  bottom: 20px;
+  left: 5%;
+  border: 5px solid $purple;
+  border-radius: 5px;
+  z-index: 9999;
+  background: #fff;
+  color: #555;
+  padding: 20px 15px;
+  &__close {
+    position: absolute;
+    top: -2px;
+    right: 5px;
+    color: $purple;
+    font-size: 20px;
+  }
+  img {
+    width: 30%;
+  }
+  p {
+    width: 70%;
+    padding-left: 10px;
+  }
+  img, p {
+    vertical-align: middle;
+    display: inline-block;
+  }
+  &__triangle {
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid $purple;
+    position: absolute;
+    bottom: -19px;
+    left: calc((100% - 30px)/2);
+  }
+}

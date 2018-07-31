@@ -1,0 +1,54 @@
+.row
+  .col-xs-12
+    h1.Page__title
+      | マイページ
+    p.Page__text
+      | お気に入り授業の時間割と、登録したレビューが確認できます。
+
+.row
+  .col-xs-12.mB30
+    div
+      ul class="nav nav-tabs" role="tablist"
+        li role="presentation" class="active"
+          a href="#spring" aria-controls="spring" role="tab" data-toggle="tab"
+            | 春学期
+        li role="presentation"
+          a href="#fall" aria-controls="fall" role="tab" data-toggle="tab"
+            | 秋学期
+      .tab-content
+        .tab-pane.active role="tabpanel" id="spring"
+          .table-responsive
+            = render 'classes/result/timetable', lessons: @spring_lessons
+        .tab-pane role="tabpanel" id="fall"
+          .table-responsive
+            = render 'classes/result/timetable', lessons: @fall_lessons
+
+  .col-xs-12
+    .panel.panel-info
+      .panel-heading
+        h4.panel-title
+          | 今までレビューを書いた授業
+      .panel-body
+        .table-responsive
+          table.table.table-bordered.table-condensed
+            tr
+              th
+                | 講義名
+              th
+                | 講師
+              th
+
+            - @results.each do |result|
+              tr
+                td
+                  = link_to result.lesson.lesson_name, lesson_path(result.lesson)
+                td
+                  = result.lesson.professor_name
+                td
+                  p
+                    = link_to "編集", edit_lesson_result_path(result.lesson, result), class: "btn btn-primary btn-sm", onClick: "gtag('event', 'click', {'event_category': 'mypage', 'event_label': 'to_edit_result'});"
+                    = link_to "削除", lesson_result_path(result.lesson, result), method: :delete, data: { confirm: '本当に削除しますか？'}, class: "btn btn-danger btn-sm", onClick: "gtag('event', 'click', {'event_category': 'mypage', 'event_label': 'destroy_result'});"
+.row
+  .col-xs-12
+    p
+      = link_to 'プロフィールの編集', edit_user_registration_path, onClick: "gtag('event', 'click', {'event_category': 'mypage', 'event_label': 'edit_profile'});"

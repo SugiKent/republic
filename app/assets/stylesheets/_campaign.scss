@@ -1,0 +1,12 @@
+@import "media_queries";
+
+.Campaign {
+  text-align: center;
+  margin: 30px auto;
+  &__image {
+    width: 80%;
+    @include max-screen($breakpoint-tablet) {
+      width: 100%;
+    }
+  }
+}

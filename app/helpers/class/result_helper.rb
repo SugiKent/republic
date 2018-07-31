@@ -1,0 +1,2 @@
+module Class::ResultHelper
+end

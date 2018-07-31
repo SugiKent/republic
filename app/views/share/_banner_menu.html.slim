@@ -1,0 +1,15 @@
+.BannerMenu
+  .BannerMenu__list
+    .BannerMenu__item
+      = link_to pdfs_path, onClick: "gtag('event', 'click', {'event_category': 'BannerMenu', 'event_label': 'to_pdfs'});" do
+        = image_tag 'menus/to_pdf.png'
+    .BannerMenu__item
+      = link_to class_rooms_path, onClick: "gtag('event', 'click', {'event_category': 'BannerMenu', 'event_label': 'to_class_rooms'});" do
+        = image_tag 'menus/to_classroom.png'
+    .BannerMenu__item
+      - if current_user.present?
+        = link_to rankings_path(faculty_id: current_user.faculty_id), onClick: "gtag('event', 'click', {'event_category': 'BannerMenu', 'event_label': 'to_ranking/#{current_user.faculty_id}'});" do
+          = image_tag 'menus/to_ranking.png'
+      - else
+        = link_to rankings_path, onClick: "gtag('event', 'click', {'event_category': 'BannerMenu', 'event_label': 'to_ranking/zenkari'});" do
+          = image_tag 'menus/to_ranking.png'

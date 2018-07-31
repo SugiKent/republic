@@ -1,0 +1,28 @@
+ruby:
+  search = lesson_search_condition(request.fullpath)
+  searched_link = request.fullpath
+  breadcrumb :lesson_search, search, searched_link
+  set_meta_tags title: "#{search}検索結果 - Rep立教大学シラバス検索システム", description: "#{search}検索結果です。もうみんな使ってる！立教生による立教生のためのシラバス検索システム！Repでは立教大学の授業シラバス検索を簡単にできます。", og: {type: 'article', url: request.url}, twitter: {url: request.url}
+
+- unless amp_ready?
+  .row
+    .col-xs-12
+      .panel.panel-primary
+        .panel-heading
+          h3.panel-title
+            | 検索項目
+        .panel-body
+          .row
+            .col-xs-12
+              - flash.each do |type, value|
+                = content_tag(:div, value, class: "alert bg-info alert-#{type}")
+          = render 'search'
+- unless amp_ready?
+  = paginate @lessons
+= render 'lessonmodule', lessons: @lessons, type: "#{controller_name}/#{action_name}"
+- unless amp_ready?
+  = paginate @lessons
+- else
+  .pT20.pB20.Amp__link
+    | 検索結果の続きは
+    = link_to "こちらから", "#{request.url.gsub('.amp', '')}"

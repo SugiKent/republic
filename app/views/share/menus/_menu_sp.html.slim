@@ -1,0 +1,36 @@
+.Header__menu
+  - if user_signed_in?
+    = render 'share/users/status'
+
+    .Header__block
+      ul.Header__list
+        li
+          = link_to "シラバス検索", root_path, onClick: "gtag('event', 'click', {'event_category': 'Header', 'event_label': 'to_root'});"
+        li
+          = link_to "オリジナル時間割作成", pdfs_path, onClick: "gtag('event', 'click', {'event_category': 'Header', 'event_label': 'to_pdfs'});"
+        hr
+        li
+          = link_to "みんなの掲示板", chat_rooms_path, onClick: "gtag('event', 'click', {'event_category': 'Header', 'event_label': 'to_chat_rooms'});"
+        li
+          = link_to "空き教室サーチャー", class_rooms_path, onClick: "gtag('event', 'click', {'event_category': 'Header', 'event_label': 'to_class_rooms'});"
+        hr
+        li
+          = link_to "マイページ", mypage_path, onClick: "gtag('event', 'click', {'event_category': 'Header', 'event_label': 'to_maypage'});"
+        li
+          = link_to 'ログアウト', destroy_user_session_path, method: :delete, :class => 'Header__item-link', onClick: "gtag('event', 'click', {'event_category': 'Header', 'event_label': 'logout'});"
+
+  - else
+    .Header__block
+      ul.Header__list
+        li
+          = link_to '新規ユーザー登録', new_user_registration_path, :class => 'Header__item-link', onClick: "gtag('event', 'click', {'event_category': 'Header', 'event_label': 'signup'});"
+        li
+          = link_to 'ログイン', new_user_session_path, :class => 'Header__item-link', onClick: "gtag('event', 'click', {'event_category': 'Header', 'event_label': 'signin'});"
+        hr
+        li
+          = link_to "シラバス検索", root_path, onClick: "gtag('event', 'click', {'event_category': 'Header', 'event_label': 'to_root'});"
+        li
+          = link_to "オリジナル時間割作成", pdfs_path, onClick: "gtag('event', 'click', {'event_category': 'Header', 'event_label': 'to_pdfs'});"
+        hr
+        li
+          = link_to "みんなの掲示板", chat_rooms_path, onClick: "gtag('event', 'click', {'event_category': 'Header', 'event_label': 'to_chat_rooms'});"

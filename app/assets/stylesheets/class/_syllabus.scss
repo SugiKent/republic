@@ -1,0 +1,75 @@
+@import "common/color";
+@import "common/font";
+@import "media_queries";
+
+.Syllabus {
+  &__list {
+    list-style-type: none;
+    width: 100%;
+    margin: 0px auto 15px;
+    padding-left: 0px;
+    box-shadow: 1px 1px 4px 0px lighten($light-gray, 20%);
+    border-radius: 3px;
+  }
+  &__hidden {
+    display: none;
+    opacity: 0;
+  }
+  &__row {
+    width: 100%;
+    padding: 8px;
+  }
+  &__header {
+    font-size: 13px;
+    font-weight: bold;
+    color: $blue;
+    p {
+      letter-spacing: 0.1em;
+      margin: 0px;
+    }
+  }
+  &__content {
+    padding: 7.5px 0px 0px;
+  }
+  &__text {
+    color: $syllabus-gray;
+    font-size: 13px;
+    margin: 0px;
+  }
+  &__table {
+    margin-top: 10px;
+    th {
+      letter-spacing: 0.1em;
+      font-size: 12px;
+      font-weight: bold;
+      color: darken($blue, 5%);
+    }
+    td {
+      color: $syllabus-gray;
+      font-size: 13px;
+      margin: 0px;
+    }
+  }
+  &__tr {
+    margin: 0 10px;
+    padding: 7.5px;
+    border-bottom: 1px solid lighten($light-gray, 30%);
+    color: $syllabus-gray;
+    font-size: 13px;
+  }
+  &__sp-responsive {
+    min-width: 100%;
+    overflow: auto;
+  }
+  &__more {
+    display: block;
+    text-align: right;
+    padding-right: 8px;
+    padding-bottom: 10px;
+    margin-top: 10px;
+    &--button {
+      cursor: pointer;
+      color: $light-blue;
+    }
+  }
+}

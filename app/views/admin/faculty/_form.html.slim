@@ -1,0 +1,8 @@
+.row.center-block
+  .form-group.col-xs-10
+    label.form-label
+      | 学部名
+    = f.text_field :faculty_name, class: "form-control"
+.row
+  .col-xs-12
+    = f.submit class: "btn btn-success"

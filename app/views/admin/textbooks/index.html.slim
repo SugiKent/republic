@@ -1,0 +1,9 @@
+- breadcrumb :textbooks_top
+
+.row
+  .col-sm-9.col-xs-12
+    = render 'message'
+    = render 'search'
+    = paginate @textbooks
+    = render 'list'
+    = paginate @textbooks

@@ -1,0 +1,35 @@
+- title = "#{@conversation.having_user.email}さんと#{@conversation.request_user.email}さん"
+- parent_title = @conversation.matchable.text_book.title + "#{@conversation.matchable.having_user_id.present? ? 'を欲しいユーザー' : 'を持っているユーザー'}"
+- breadcrumb :conversation, title, parent_title, @conversation.matchable
+
+.col-sm-9.col-xs-12
+  h3.text-info
+    = @conversation.having_user.email
+    | さんから
+    br
+    = @conversation.request_user.email
+    | さんへ
+    br
+    = @conversation.matchable.text_book.title
+
+
+  = form_for(@new_message, url: {controller: 'messages', action: 'create'}, remote: true) do |f|
+    .mT10
+      = f.text_area :content, id: "content_field", class: "form-control"
+      = f.hidden_field :conversation_id, value: @conversation.id
+    .mT5.text-right
+      = f.submit "送信", class: "btn btn-success btn-go", data: { disable_with: '送信中' }
+  .Post__contents.mT10
+    = render 'post_content'
+
+.col-sm-3.col-xs-12
+  = render 'textbooks/sidebar'
+
+javascript:
+  $(document).on('turbolinks:load', function(){
+    setTimeout(function(){
+      if ($('#content_field').val() == "") {
+        location.reload()
+      }
+    }, 30000)
+  });

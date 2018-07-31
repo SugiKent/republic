@@ -1,0 +1,9 @@
+table.table.table-striped
+  - @conversation.messages.each_with_index do |message, i|
+    tr
+      td
+        span
+          = message.created_at.to_s(:created_at)
+          = message.user.email
+        .mT5.mB5
+          = simple_format(h(message.content), class: "Post__text")

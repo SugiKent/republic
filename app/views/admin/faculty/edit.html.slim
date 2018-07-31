@@ -1,0 +1,6 @@
+.page-header
+  h3
+    | 学部情報を編集
+= form_for @faculty, :url => { :controller => :faculty, :action => :update } do |f|
+  = render 'form', f: f
+= link_to 'Back', admin_faculty_index_path, class: "btn btn-default"

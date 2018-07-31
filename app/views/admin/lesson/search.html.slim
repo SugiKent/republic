@@ -1,0 +1,43 @@
+.page-header
+  h3
+    | 授業管理
+.row
+  .col-xs-12
+    .panel.panel-info
+      .panel-heading
+        h3.panel-title
+          | 検索項目
+      .panel-body
+        = render 'search'
+.row
+  .col-md-12
+    .table-responsive
+      table.table.table-striped
+        tr
+          th
+            | 授業名
+          th
+            | 担当講師名
+          th
+            | スコア（平均）
+          th
+            | コマ
+          th
+
+          th
+
+        - @lessons.each do |lesson|
+          tr
+            td
+              = lesson.lesson_name
+            td
+              = lesson.professor_name
+            td
+              = lesson.results.average(:score)
+            td
+              = lesson_period_format(lesson.period)
+            td
+              = link_to "編集", edit_admin_lesson_path(lesson), class: "btn btn-success"
+            td
+              = link_to "削除", admin_lesson_path(lesson), method: :delete, data: { confirm: '本当に削除しますか？'}, class: "btn btn-danger"
+= link_to "登録", new_admin_lesson_path, class: "btn btn-primary"

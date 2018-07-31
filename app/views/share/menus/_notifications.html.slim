@@ -1,0 +1,12 @@
+ul.Notify data-type='bell'
+  - if @notifications.present?
+    - @notifications.each do |note|
+      - if current_user.readed_at.blank?
+        - status = 'Notify__unreaded'
+      - elsif current_user.readed_at < note.created_at
+        - status = 'Notify__unreaded'
+      li.Notify__item class="#{status}"
+        = notify_content(note)
+  - else
+    li.Notify__item
+      | 通知がありません。

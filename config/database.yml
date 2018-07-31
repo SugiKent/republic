@@ -1,0 +1,44 @@
+# MySQL.  Versions 5.0+ are recommended.
+#
+# Install the MYSQL driver
+#   gem install mysql2
+#
+# Ensure the MySQL gem is defined in your Gemfile
+#   gem 'mysql2'
+#
+# And be sure to use new-style password hashing:
+#   http://dev.mysql.com/doc/refman/5.0/en/old-client.html
+#
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: 5
+  username: root
+  password:
+  host: localhost
+
+development:
+  <<: *default
+  database: rikkyo_app_development
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: rikkyo_app_test
+
+staging:
+  <<: *default
+  adapter: postgresql
+  encoding: unicode
+
+production:
+  <<: *default
+  adapter: mysql2
+  encoding: utf8
+  database: rikkyo_app_production
+  username: root
+  password: <%= ENV['RIKKYO_DB_PASSWORD'] %>
+  host: <%= ENV['RIKKYO_DB_HOST'] %>
+  port: 3306

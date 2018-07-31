@@ -1,0 +1,31 @@
+.Page__title
+  = @textbook.title
+
+= image_tag @textbook.large_image, style: "width: 200px;"
+
+.row.mT10.mB10
+  .col-xs-12
+    .Page__text
+      | この教科書が使われている授業
+    .row
+      .col-xs-12.col-md-6
+        ul
+          - @textbook.lessons.each do |lesson|
+            li
+              = link_to lesson.lesson_name, lesson_path(lesson)
+      .col-xs-12.col-md-6
+        p
+          = button_to "買い取った教科書を追加", admin_bookstores_path, params: { text_book_id: @textbook }, class: "btn btn-primary"
+        - if @stores.present?
+          table.table
+            - @stores.each do |store|
+              tr
+                td
+                  = store.id
+                td
+                  - if store.is_sold
+                    = link_to "販売中に", admin_bookstore_path(store), method: :delete, class: "btn btn-info"
+                  - else
+                    = link_to "販売完了", admin_bookstore_path(store), method: :delete, class: "btn btn-danger"
+        - else
+          | 在庫がありません。

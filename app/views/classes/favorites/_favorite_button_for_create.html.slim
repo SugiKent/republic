@@ -1,0 +1,8 @@
+- if user_signed_in?
+  = button_to add_lesson_path(lesson), method: :post, class: "btn btn-warning btn-#{size}", data: { disable_with: "送信中..." }, remote: true, onClick: "gtag('event', 'click', {'event_category': 'lesson', 'event_label': 'favorite/create'});" do
+    i.glyphicon.glyphicon-star
+    | お気に入りに追加
+/ - else
+  = button_to none_lesson_path(lesson), class: "btn btn-warning btn-#{size}", onClick: "gtag('event', 'click', {'event_category': 'lesson', 'event_label': 'favorite/none'});" do
+    i.glyphicon.glyphicon-star
+    | お気に入りに追加

@@ -1,0 +1,29 @@
+@import "common/color";
+@import "common/font";
+@import "media_queries";
+
+.Textbook {
+  &__item {
+    padding: 5px 10px 10px;
+    margin: 10px 5px;
+    border-radius: 3px;
+    color: $gray;
+    position: relative;
+    box-shadow: 1px 1px 4px 0px lighten($light-gray, 0%);
+  }
+  &__title {
+    font-size: 16px;
+    font-weight: normal;
+    color: $gray;
+  }
+  &__table {
+    td {
+      color: $light-gray;
+    }
+  }
+  &__buttons {
+    width: 100%;
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+}

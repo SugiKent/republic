@@ -1,0 +1,21 @@
+@import "common/color";
+
+.Term {
+  &__title {
+    font-size: 18px;
+    font-weight: bold;
+    color: $gray;
+  }
+  &__section-title {
+    width: 100%;
+    border-bottom: 1px dotted $orange;
+    padding-bottom: 8px;
+    font-size: 15px;
+    margin-top: 25px;
+  }
+  &__text {
+    font-size: 13px;
+    color: $gray;
+    line-height: 20px;
+  }
+}

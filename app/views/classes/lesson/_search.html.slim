@@ -1,0 +1,34 @@
+= form_tag(search_lesson_index_path, method: "get") do
+  .row
+    .form-group.col-sm-6.col-xs-12
+      = text_field_tag :name, params[:name], placeholder: "授業名/教授名", class: "form-control"
+    .form-group.col-sm-6.col-xs-12
+      = text_field_tag :content, params[:content], placeholder: "授業内容", class: "form-control"
+  .row
+    .form-group.col-sm-3.col-xs-6
+      = select_tag 'year', options_for_select({"2017年度"=>"2017", "2018年度"=>"2018"}, {selected: params[:year] || '2018'}), include_blank: "年度", class: "form-control"
+    .form-group.col-sm-3.col-xs-6
+      = select_tag 'campus', options_for_select({"池袋"=>"1", "新座"=>"2", "その他"=>"3"}, {selected: params[:campus]}), include_blank: "キャンパス", class: "form-control"
+    .form-group.col-sm-3.col-xs-6
+      = select_tag('faculty_id', options_from_collection_for_select(Faculty.all, :id, :faculty_name, {selected: params[:faculty_id]}), prompt: "学部", class: "form-control")
+    .form-group.col-sm-3.col-xs-6
+      = render 'classes/lesson/departments', locals: {faculty_id: Faculty.first.id}
+  .row
+    .form-group.col-sm-3.col-xs-4
+      = select_tag 'term', options_for_select({"春学期"=>"1", "秋学期"=>"2", "通年"=>"3", "その他"=>"4"}, {selected: params[:term] || '1'}), include_blank: "学期", class: "form-control"
+    .form-group.col-sm-3.col-xs-4
+      = select_tag 'day', options_for_select({"月"=>"a", "火"=>"b", "水"=>"c", "木"=>"d", "金"=>"e", "土"=>"f"}, {selected: params[:day]}), include_blank: "曜日", class: "form-control"
+    .form-group.col-sm-3.col-xs-4
+      = select_tag 'hour', options_for_select({"１"=>"1", "２"=>"2", "３"=>"3", "４"=>"4", "５"=>"5", "６"=>"6"}, {selected: params[:hour]}), include_blank: "時限", class: "form-control"
+    .form-group.col-sm-3.col-xs-12
+      = select_tag 'evaluation', options_for_select({"100%"=>"100", "〜75%"=>"75", "〜50%"=>"50", "0%"=>"0"}, {selected: params[:evaluation]}), include_blank: "筆記の割合", class: "form-control"
+  .pull-left
+    .form-group.text-right
+      .checkbox
+        label
+          = check_box_tag :have_result, true, params[:have_result]
+          | レビューのある授業だけ
+  .pull-right
+    .form-group
+      = submit_tag "検索", class: "btn btn-success btn-go", data: { disable_with: "送信中..." }, onClick: "gtag('event', 'click', {'event_category': 'lesson', 'event_label': 'search'});"
+  .clearfix

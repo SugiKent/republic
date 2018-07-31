@@ -1,0 +1,20 @@
+div[style="border: 3px dashed #c71585; text-align: center;"]
+  p[style="font-size: 40px; padding: 60px; color: #c71585;"]
+    | Rep
+    br
+    span[style="font-size: 18px;"]
+      | Rep立教大学シラバス検索システム
+  p[style="color: #777;"]
+    | ようこそ！
+    = @email
+    | さん!
+  div[style="margin: 30px auto;"]
+    p[style="color: #777;"]
+      | 本登録ボタンをクリックすることで、Rep立教大学シラバス検索システム を利用できるようになります！
+      br
+      | ご利用はもちろん無料！
+      br
+      | ボタンを押したらログインしてレビューを書いてみてください！
+  div[style="width: 100%; margin: 40px auto;"]
+    div[style="text-align: center;"]
+      = link_to '本登録', confirmation_url(@resource, confirmation_token: @token), :style=>"font-size: 25px; padding: 10px 30px; width: 100px; margin: 40px auto; background: #50b6b9; border-radius: 5px; color: #fff; line-height: 30px; text-decoration: none;"

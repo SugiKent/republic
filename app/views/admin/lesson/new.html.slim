@@ -1,0 +1,8 @@
+.page-header
+  h3
+    | 新しい授業の登録
+.row
+  .col-md-12
+    = form_for @lesson, :url => { :controller => :lesson, :action => :create } do |f|
+      = render 'form', f: f
+    = link_to 'Back', admin_lesson_index_path, class: "btn btn-default"

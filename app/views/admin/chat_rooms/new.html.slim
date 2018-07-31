@@ -1,0 +1,6 @@
+.page-header
+  h3
+    | チャットルームを登録
+= form_for @chat_room, :url => { :controller => :chat_rooms, :action => :create } do |f|
+  = render 'form', f: f
+= link_to 'Back', admin_chat_rooms_path

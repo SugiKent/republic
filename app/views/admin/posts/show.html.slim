@@ -1,0 +1,13 @@
+table.table.table-striped
+  - @lesson.posts.each_with_index do |post, i|
+    tr
+      td
+        = i+1
+        | &nbsp;:&nbsp;
+        span
+        = post.created_at.to_s(:created_at)
+        .mT5.mB5
+          = simple_format(h(post.content), class: "Post__text")
+      - if current_user.admin?
+        td
+          = link_to "削除", admin_post_path(post), method: :delete, data: { confirm: '本当に削除しますか？'}, class: "btn btn-danger"

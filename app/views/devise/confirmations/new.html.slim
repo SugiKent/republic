@@ -1,0 +1,23 @@
+.container
+  .Page
+    h1.Page__title
+      | 本登録メールの再送信
+    p.Page__text
+      | 新規登録のメールが届かない方は、こちらから再送信できます。
+  .row
+    .col-sm-6.col-xs-12
+      = form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f|
+        p.bg-danger
+          = devise_error_messages!
+
+        .col-xs-12
+          .field.form-group
+            = f.label :email
+            br
+            = f.email_field :email, autofocus: true, value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), class: 'form-control'
+        .col-xs-12
+          .actions
+            p
+              = f.submit "本登録メールをもう一度送信する", class: 'btn btn-success btn-go', data: { disable_with: "送信中..." }, onClick: "gtag('event', 'click', {'event_category': 'confirmation', 'event_label': 'resend_mail'});"
+      .col-xs-12
+        = render "devise/shared/links"

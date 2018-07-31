@@ -1,0 +1,48 @@
+h1.Page__title
+  | 空き教室サーチャー
+
+h2.Page__title
+  - days = {"月"=>"a", "火"=>"b", "水"=>"c", "木"=>"d", "金"=>"e", "土"=>"f"}
+  - hours = {"０"=>"0", "１"=>"1", "２"=>"2", "３"=>"3", "４"=>"4", "５"=>"5", "６"=>"6"}
+  - if @jigen.present?
+    = days.select{|k,v|v==@jigen['day']}.keys[0]
+    | 曜日
+    = hours.select{|k,v|v==@jigen['hour']}.keys[0]
+  - else
+    = now_jigen
+  | 限の空き教室が表示されています。
+
+
+.row
+  .col-xs-12.col-sm-6
+    table.table.table-striped
+      - hours.each do |hour|
+        tr
+          - days.each do |day|
+            - if hour[1] == '0'
+              th
+                = day[0]
+            - if hour[1] != '0'
+              td
+                = link_to hour[0], class_rooms_path(hour:hour[1], day:day[1])
+
+- @rooms.each do |campus|
+  h3
+    - case campus.first
+    - when :ikebukuro
+      | 池袋
+    - else
+      | 新座
+  table.table.table-striped
+    - campus[1].each do |koma|
+      tr
+        th
+          = koma[0].upcase
+          | 号館
+        td
+          table.table
+            - koma[1].each do |room|
+              tr
+                = room.upcase
+                - if koma[1].last != room
+                  | 、

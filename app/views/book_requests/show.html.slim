@@ -1,0 +1,32 @@
+- page_title = @book_request.text_book.title + "#{@book_request.having_user_id.present? ? 'を欲しいユーザー' : 'を持っているユーザー'}"
+- breadcrumb :book_request, page_title, @book_request
+
+.row
+  .col-sm-9.col-xs-12
+    h1.Page__title
+      = page_title
+    p.alert.alert-info
+      | リクエストを送ると、相手に通知が送られてチャットが始まります。
+      br
+      | 本の渡し方や、価格について相談しましょう。
+    table.table
+      - @matched_requests.each do |request|
+        tr
+          td
+            = request.user.email
+          td
+            - if @book_request.having_user_id.present?
+              / current_userが本を持っている時
+              - if @matched_users.pluck(:request_user_id).include?(request.user.id)
+                = link_to "チャットを開く", conversation_path(@matched_users.find_by(request_user_id: request.user.id)), class: "btn btn-primary"
+              - else
+                = link_to 'リクエストを送る', conversations_path(book_request_id: @book_request, request_user: request.user.id, having_user: current_user.id), method: :post, class: "btn btn-info btn-go"
+            - else
+              / current_userが本を欲している時
+              - if @matched_users.pluck(:having_user_id).include?(request.user.id)
+                = link_to "チャットを開く", conversation_path(@matched_users.find_by(having_user_id: request.user.id)), class: "btn btn-primary"
+              - else
+                = link_to 'リクエストを送る', conversations_path(book_request_id: @book_request, having_user: request.user.id, request_user: current_user.id), method: :post, class: "btn btn-info btn-go"
+
+  .col-sm-3.col-xs-12
+    = render 'textbooks/sidebar'

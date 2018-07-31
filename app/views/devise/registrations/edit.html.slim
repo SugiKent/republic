@@ -1,0 +1,49 @@
+.row
+  .col-xs-12
+    = link_to "マイページに戻る", :back
+
+.Page
+  h1.Page__title
+    | プロフィールの編集
+  p.Page__text
+    | パスワードを変更できます。
+.row
+  .col-md-6.col-xs-12
+    = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+      = devise_error_messages!
+      .col-xs-12
+        .field.form-group
+          = f.label :email
+          br
+          = f.email_field :email, autofocus: true, class: "form-control", disabled: true
+      .col-xs-12
+        - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+          div
+            | Currently waiting confirmation for:
+            = resource.unconfirmed_email
+      .col-xs-12
+        .field.form-group
+          = f.label :current_password
+          br
+          = f.password_field :current_password, autocomplete: "off", class: "form-control"
+      .col-xs-12
+        .field.form-group
+          label
+            | 新しいパスワード
+          br
+          = f.password_field :password, autocomplete: "off", class: "form-control"
+      .col-xs-12
+        .field.form-group
+          label
+            | 新しいパスワード（確認）
+          br
+          = f.password_field :password_confirmation, autocomplete: "off", class: "form-control"
+      .col-xs-12
+        .actions
+          p
+            = f.submit "変更", class: "btn btn-success btn-go", data: { disable_with: "送信中..." }, onClick: "gtag('event', 'click', {'event_category': 'registraion', 'event_label': 'edit_user'});"
+    .col-xs-12
+      h6
+        | 登録情報を抹消しますか？
+      p
+        = link_to "退会する", registration_path(resource_name), data: { confirm: "登録情報を抹消してよろしいでしょうか。" }, method: :delete, onClick: "gtag('event', 'click', {'event_category': 'registraion', 'event_label': 'destroy_user'});"

@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+    meta[name="viewport" content="width=device-width, initial-scale=1"]
+    = display_meta_tags default_meta_tags
+    = render 'share/icons'
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  body
+    .wrap
+      = render 'share/admin/header'
+      .container-fluid
+        .row
+          .col-sm-2.col-xs-12
+            = render 'share/admin/sidebar'
+          .col-sm-10.col-xs-12
+            .row
+              .col-xs-12
+                - flash.each do |type, value|
+                  = content_tag(:div, value, class: "alert alert-#{type} bg-info text-info")
+            = yield
+      = render 'share/admin/footer'

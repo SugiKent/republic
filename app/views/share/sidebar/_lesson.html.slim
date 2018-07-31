@@ -1,0 +1,7 @@
+= link_to lesson_path(lesson), class: "Sidebar__lesson", onClick: "gtag('event', 'click', {'event_category': 'sidebar', 'event_label': 'lesson_ranking/#{type}'});" do
+  span.badge.Sidebar__badge
+    = i
+  p.Sidebar__link
+    = lesson.lesson_name
+  p.Sidebar__text
+    = lesson.department.department_name

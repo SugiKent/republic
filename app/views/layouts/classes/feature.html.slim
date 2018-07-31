@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    - if Rails.env == 'production'
+      = render 'share/analytics'
+    meta[name="viewport" content="width=device-width, initial-scale=1"]
+    = render 'share/icons'
+    = display_meta_tags default_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload', defer: true
+    = csrf_meta_tags
+  body
+    .wrap
+      = render 'share/header'
+      .container
+        .row
+          .col-xs-12
+            .mT5.mB10
+              - gretel = breadcrumbs style: :bootstrap
+              = gretel.to_s
+        .row
+          .col-sm-9.col-xs-12
+            = yield
+          .col-sm-3.col-xs-12
+            = render 'share/sidebar'
+      = render 'share/footer'
+    = render 'share/add_home'

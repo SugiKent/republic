@@ -1,0 +1,4 @@
+slack_webhook:
+  added_review: https://hooks.slack.com/services/99999999/9999999/98999999999999
+  admin: https://hooks.slack.com/services/99999999/9999999/98999999999999
+  contact: https://hooks.slack.com/services/99999999/9999999/98999999999999

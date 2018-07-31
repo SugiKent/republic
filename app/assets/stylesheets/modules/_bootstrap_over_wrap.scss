@@ -1,0 +1,31 @@
+@import "common/color";
+@import "common/font";
+
+.btn-go {
+  background-color: $orange;
+  border-color: $orange;
+  &:hover,
+  &:active:hover,
+	&.active:hover,
+	&:active:focus,
+	&.active:focus,
+	&:active.focus,
+	&.active.focus,
+  &.disabled:hover,
+	&[disabled]:hover,
+	&.disabled:focus,
+	&[disabled]:focus,
+	&.disabled.focus,
+	&[disabled].focus {
+    background-color: darken($orange, 5%);
+    border-color: #fff;
+  }
+}
+
+.bg-theme-blue {
+  background-color: $blue;
+}
+
+.text-white {
+  color: #fff;
+}

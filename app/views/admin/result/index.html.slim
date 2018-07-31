@@ -1,0 +1,40 @@
+.page-header
+  h3
+    | 学部管理
+.row
+  .col-xs-12
+    div
+      table.table.table-striped
+        tr
+          th
+            | ID
+          th
+            | 授業
+          th
+            | 学部/学科
+          th
+            | コメント
+          - if current_user.admin?
+            th
+              | ユーザー
+            th
+
+        - @results.each do |result|
+          tr
+            td
+              = link_to result.lesson.id, lesson_path(result.lesson)
+            td
+              = result.lesson.lesson_name
+            td
+              = result.lesson.faculty.faculty_name
+              | /
+              = result.lesson.department.department_name
+            td
+              = result.comment
+            - if current_user.admin?
+              td
+                - if result.user.present?
+                  = link_to result.user.email, admin_user_path(result.user)
+              td
+                = link_to "削除", admin_result_path(result), method: :delete, data: { confirm: '本当に削除しますか？'}, class: "btn btn-danger"
+    = paginate @results

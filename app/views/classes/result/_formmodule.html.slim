@@ -1,0 +1,101 @@
+- if @result.errors.full_messages.present?
+  .row
+    .col-xs-12
+      .alert.alert-danger
+        - @result.errors.full_messages.each do |msg|
+          p
+            = msg
+.LessonDetail
+  .LessonDetail__header
+    .LessonDetail__title
+      .LessonDetail__item
+        h1
+          = @lesson.lesson_name
+
+    .LessonDetail__info
+      .table-responsive
+        table.table
+          tr
+            th
+              | 年度
+            th
+              | 学部
+            th
+              | 学科
+            th
+              | 講師
+            th
+              | 学期
+            th
+              | コマ
+            th
+              | 教室
+            th
+              | キャンパス
+            th
+              | 備考
+          tr
+            td
+              = @lesson.year
+            td
+              = @lesson.faculty.faculty_name
+            td
+              = @lesson.department.department_name
+            td
+              = raw professor_name_link(@lesson.professor_name)
+            td
+              - case @lesson.term
+              - when 1
+                = "春"
+              - when 2
+                = "秋"
+              - when 3
+                = "通年"
+              - when 4
+                = "その他"
+            td
+              = lesson_period_format(@lesson.period)
+            td
+              = @lesson.classroom
+            td
+              - case @lesson.campus
+              - when 1
+                = "池袋"
+              - when 2
+                = "新座"
+              - when 3
+                = "その他"
+            td
+              - if @lesson.note.nil?
+                = @lesson.note
+              - else
+                = "特になし"
+.row.center-block
+  .row
+    .form-group.col-md-12.col-xs-12
+      label.form-label
+        | 成績評価（D〜S）
+      = f.select(:grade, ['S', 'A', 'B', 'C', 'D'], { include_blank: "あなたの成績を選択してください" }, { class: "form-control form-grade-input" })
+  .row
+    .form-group.col-md-4.col-sm-4.col-xs-12
+      label.form-label
+        | 学びの大きさ
+      = f.select( :rep_1, ['5', '4', '3', '2', '1'], { prompt: "5が最高で、1が最低です" }, { class: "form-control" } )
+    .form-group.col-md-4.col-sm-4.col-xs-12
+      label.form-label
+        | 授業の簡単さ
+      = f.select( :rep_2, ['5', '4', '3', '2', '1'], { include_blank: "5が最高で、1が最低です" }, { class: "form-control" } )
+    .form-group.col-md-4.col-sm-4.col-xs-12
+      label.form-label
+        | 単位の取りやすさ
+      = f.select( :rep_3, ['5', '4', '3', '2', '1'], { include_blank: "5が最高で、1が最低です" }, { class: "form-control" } )
+  .row
+    .form-group.col-xs-12
+      label.form-label
+        | コメント
+      p.text-danger
+        | 担当講師や大学に対する誹謗中傷は絶対に書かないでください。
+      = f.text_area :comment, :placeholder => "個人的な感想・成績評価の仕方・出欠などについて", class: "form-control", rows: 5
+.row.mB10
+  .col-xs-12
+    = f.submit class: "btn btn-success btn-go", data: { disable_with: "送信中...", turbolinks: 'false' }, onClick: "gtag('event', 'click', {'event_category': 'result', 'event_label': 'create_result'});"

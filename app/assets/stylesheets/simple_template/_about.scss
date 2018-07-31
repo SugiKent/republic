@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:500');
+@import "common/color";
+@import "common/font";
+@import "media_queries";
+
+.About {
+  &__key {
+    width: 100%;
+    height: 100vh;
+  }
+  &__section {
+    width: 80%;
+    padding: 50px 10%;
+    @include max-screen($breakpoint-tablet) {
+      width: 90%;
+      padding: 35px 5%;
+    }
+    &--alpha {
+      height: 80vh;
+    }
+  }
+  &__title {
+    color: #4d4d4d;
+    font-family: 'Work Sans', $meiryo;
+  }
+  &__dev {
+    margin: 50px auto;
+  }
+  &__chart {
+    width: 50%;
+    display: inline-block;
+    vertical-align: middle;
+    @include max-screen($breakpoint-tablet) {
+      width: 90%;
+      display: block;
+      margin-bottom: 20px;
+    }
+  }
+}

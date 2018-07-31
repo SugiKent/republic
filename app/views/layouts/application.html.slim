@@ -1,0 +1,28 @@
+doctype html
+html
+  head
+    - if Rails.env == 'production'
+      = render 'share/analytics'
+    meta[name="viewport" content="width=device-width, initial-scale=1"]
+    = render 'share/icons'
+    = display_meta_tags default_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload', defer: true
+    = csrf_meta_tags
+  body
+    .wrap
+      = render 'share/header'
+      .container
+        .row
+          .col-xs-12
+            - flash.each do |type, value|
+              - next if type == 'searched'
+              = content_tag(:div, value, class: "alert bg-info alert-#{type}")
+        .row
+          .col-xs-12
+            .mT5.mB10
+              - gretel = breadcrumbs style: :bootstrap
+              = gretel.to_s
+            = yield
+      = render 'share/footer'
+    = render 'share/add_home'

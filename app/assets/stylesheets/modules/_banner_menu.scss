@@ -1,0 +1,23 @@
+@import "common/color";
+@import "common/font";
+@import "media_queries";
+
+.BannerMenu {
+  display: none;
+  width: 100%;
+  @include max-screen($breakpoint-tablet) {
+    display: block;
+  }
+  &__list {
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-around;
+    align-content: space-around;
+  }
+  &__item {
+    text-align: center;
+    img {
+      width: 100%;
+    }
+  }
+}

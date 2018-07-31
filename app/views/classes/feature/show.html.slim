@@ -1,0 +1,27 @@
+- set_meta_tags title: "#{@feature.title} - Rep立教大学シラバス検索システム", description: "#{markdown(@feature.content).html_safe}", site: "", og: {type: 'article', url: request.url, image: @feature.image.url}, twitter: {url: request.url, image: @feature.image.url}
+- breadcrumb :feature_show, @feature
+
+.Feature
+  .row
+    .col-xs-12
+      .Feature__header style="background: url('#{@feature.image.url}');background-repeat: no-repeat;background-position: center;background-size: 100% 100%;"
+    .col-xs-12
+      h2.Feature__title
+        = @feature.title
+      p.Feature__date
+        = @feature.created_at.strftime("%Y年%m月%d日")
+      .Feature__tags.mB10
+        - @feature.faculties.each do |faculty|
+          span.Feature__tag
+            i.glyphicon.glyphicon-tag.mR5
+            = faculty.faculty_name
+        - @feature.categories.each do |category|
+          span.Feature__tag
+            i.glyphicon.glyphicon-tag.mR5
+            = category.name
+      .Feature__content
+        = markdown(@feature.content).html_safe
+
+- if @lessons.present?
+  .Lesson__relative-lesson.mT30
+    = render 'classes/lesson/lessonmodule', lessons: @lessons, type: "#{controller_name}/#{action_name}"

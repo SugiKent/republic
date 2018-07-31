@@ -1,0 +1,22 @@
+- breadcrumb :root
+
+.row
+  .col-xs-12
+    .panel.panel-primary
+      .panel-heading
+        h3.panel-title
+          | 検索項目
+      .panel-body
+        .row
+          .col-xs-12
+            - flash.each do |type, value|
+              = content_tag(:div, value, class: "alert bg-info alert-#{type}")
+            .fl.hidden
+              p
+                = @fl
+        = render 'search'
+  .col-xs-12
+    h3.text-info
+      | 新着レビュー
+    = render 'lessonmodule', lessons: @lessons, type: "#{controller_name}/#{action_name}"
+#howto__module

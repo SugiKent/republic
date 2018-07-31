@@ -1,0 +1,6 @@
+.page-header
+  h3
+    | カテゴリーを登録
+= form_for @category, :url => { :controller => :category, :action => :create } do |f|
+  = render 'form', f: f
+= link_to 'Back', admin_category_index_path, class: "btn btn-default"

@@ -1,0 +1,35 @@
+.page-header
+  h3
+    | ユーザー管理
+.row
+  .col-xs-12
+    .table-responsive
+      table.table.table-striped
+        tr
+          th
+            | メアド
+          th
+            | レビュー数
+          th
+            | ログイン回数
+          th
+            | 最終ログイン
+          th
+            | 登録日
+          th
+
+        - @users.each do |user|
+          tr
+            td
+              = link_to user.email, admin_user_path(user)
+            td
+              = user.results.count
+            td
+              = user.sign_in_count
+            td
+              = user.current_sign_in_at
+            td
+              = user.confirmed_at
+            td
+              = link_to "削除", admin_user_path(user), method: :delete, data: { confirm: '本当に削除しますか？'}, class: "btn btn-danger"
+    = paginate @users

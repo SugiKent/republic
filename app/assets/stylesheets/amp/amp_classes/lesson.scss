@@ -1,0 +1,124 @@
+// // Core variables and mixins
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+
+// // Reset and dependencies
+// @import "bootstrap/normalize";
+@import "bootstrap/print";
+// @import "bootstrap/glyphicons";
+
+// // Core CSS
+// @import "bootstrap/scaffolding";
+// @import "bootstrap/type";
+// @import "bootstrap/code";
+// @import "bootstrap/grid";
+@import "bootstrap/tables";
+@import "bootstrap/alerts";
+// @import "bootstrap/buttons";
+
+// @import '../../bootstrap_and_overrides';
+// @import '../../modules/bootstrap_over_wrap';
+@import '../../class/lesson';
+@import '../../class/syllabus';
+@import '../../common/utility';
+@import '../../common/color';
+@import '../../header';
+@import '../../footer';
+@import '../../common';
+@import '../../sns';
+
+.Amp {
+  &__container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  .bg-danger {
+    background-color: #f2dede;
+  }
+  .text-danger {
+    color: #a94442;
+  }
+  &__link {
+    color: $light-gray;
+    a {
+      color: $light-blue;
+    }
+  }
+  .Header {
+    .hidden-xs {
+      display: none;
+    }
+    &__title {
+      position: relative;
+      bottom: 15px;
+    }
+  }
+  .text-success {
+    color: #3c763d;
+  }
+  .LessonModule__block {
+    table {
+      th {
+        font-size: 14px;
+        color: $white;
+      }
+      td {
+        font-size: 14px;
+        color: $gray;
+      }
+      .text-success {
+        color: #3c763d;
+      }
+    }
+    a {
+      color: $light-blue;
+      text-decoration: none;
+    }
+  }
+  .LessonDetail {
+    table {
+      td, th {
+        font-size: 14px;
+        color: $gray;
+      }
+      a {
+        color: $light-blue;
+        text-decoration: none;
+      }
+    }
+  }
+  .Syllabus {
+    table {
+      td, th {
+        font-size: 14px;
+        color: $gray;
+      }
+      a {
+        color: $light-blue;
+        text-decoration: none;
+      }
+    }
+    &__text {
+      padding-left: 5px;
+      padding-right: 10px;
+    }
+  }
+  .LessonModule {
+    &__col {
+      a {
+        color: $light-blue;
+        text-decoration: none;
+      }
+    }
+    &__has-review {
+      margin-top: 0px;
+    }
+  }
+  .Footer {
+    a {
+      color: $white;
+    }
+  }
+}

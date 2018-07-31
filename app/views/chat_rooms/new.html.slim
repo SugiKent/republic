@@ -1,0 +1,16 @@
+- breadcrumb :chat_room_new
+
+.row
+  .col-xs-12
+    .Page
+      h1.Page__title
+        | 掲示板を作ろう！
+      p.Page__text
+        | 掲示板のタイトルを入力して、「作成」ボタンを押すだけです。
+    = form_for @room do |f|
+      .form-group
+        = f.text_field :title, placeholder: t('activerecord.attributes.chat_room.title'), class: "form-control"
+      .form-group
+        = f.collection_select :faculty_id, Faculty.all, :id, :faculty_name, { include_blank: "学部と紐づけることができます。" }, { class: "form-control" }
+      .form-group.pull-right
+        = f.submit '作成', class: "btn btn-success btn-go"

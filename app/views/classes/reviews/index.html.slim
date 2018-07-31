@@ -1,0 +1,59 @@
+- if true
+  h1.Page__title
+    | 全部見れる！レビュー大放出
+  p.Page__text
+    | Twitterでキャンペーン実施中！
+    br
+    br
+    strong
+      | 50RT達成
+    | で、今までのRepユーザーが書いたレビューを
+    strong
+      | 全部！ぜんぶ！
+    | 見れるようになります！
+  .Campaign
+    = image_tag "campaign/rt_screen.jpeg", class: 'Campaign__image'
+  p.Page__text
+    | このツイートからゲームに参加しよう！
+    = render 'twitter'
+- else
+  h1.Page__title
+    | 全部見れる！レビュー大放出
+  p.Page__text
+    | 今までのRepユーザーが書いたレビューをまとめてみました。学部で絞り込むことができます。
+    br
+    | 厳選された春学期の授業です。
+    br
+
+  .alert.alert-info.mT20
+    = @lessons.count
+    | 個のレビューがヒット
+
+  .row
+    = form_tag(reviews_path, method: "get") do
+      .col-xs-12.col-md-4.mB30
+        .row
+          .col-xs-8
+            = select_tag('faculty_id', options_from_collection_for_select(Faculty.all, :id, :faculty_name, {selected: params[:faculty_id]}), prompt: "すべて", class: "form-control")
+          .col-xs-4
+            = submit_tag "検索", class: "btn btn-success btn-go", data: { disable_with: "送信中..." }, onClick: "gtag('event', 'click', {'event_category': 'reviews', 'event_label': 'search'});"
+
+  table.table.table-striped.table-fixedwidth.table-bordered
+    tr
+      th 授業名/学科/コマ
+      th コメント
+    - @lessons.each do |lesson|
+      tr
+        td.td-fixedwidth
+          = link_to lesson.lesson_name, lesson_path(lesson)
+          br
+          = lesson.department.department_name
+          br
+          = lesson_period_format(lesson.period)
+        td
+            table.table
+              - lesson.results.each do |result|
+                - if result.comment.present?
+                  tr
+                    td
+                      = simple_format(h(result.comment))

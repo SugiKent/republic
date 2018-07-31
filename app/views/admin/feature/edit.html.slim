@@ -1,0 +1,10 @@
+.page-header
+  h3
+    | 特集記事を編集
+.row
+  .col-xs-12
+    = form_for @feature, :url => { :controller => :feature, :action => :update } do |f|
+      = render 'form', f: f
+.row
+  .col-xs-12
+    = link_to 'Back', admin_feature_path(@feature), class: "btn btn-default"

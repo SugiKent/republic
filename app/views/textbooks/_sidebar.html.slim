@@ -1,0 +1,24 @@
+- if current_user.present?
+  .Sidebar
+    .Sidebar__title
+      h4
+        | あなたが欲しい本
+    .Sidebar__list
+      - current_user.wanted_book_requests.each do |request|
+        = link_to book_request_path(request), class: "Sidebar__lesson" do
+          p.Sidebar__link
+            = request.text_book.title
+          p.Sidebar__text
+            small
+              = request.text_book.author
+    .Sidebar__title
+      h4
+        | あなたが持っている本
+    .Sidebar__list
+      - current_user.having_book_requests.each do |request|
+        = link_to book_request_path(request), class: "Sidebar__lesson" do
+          p.Sidebar__link
+            = request.text_book.title
+          p.Sidebar__text
+            small
+              = request.text_book.author

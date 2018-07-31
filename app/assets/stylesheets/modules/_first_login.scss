@@ -1,0 +1,120 @@
+@import "common/color";
+@import "common/font";
+@import "media_queries";
+
+.FirstLogin {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 9999;
+  width: 100%;
+  height: 100vh;
+  margin: 0px auto;
+  background: rgba(0, 0, 0, 0.5);
+  &__section {
+    width: 70%;
+    margin: 50px auto;
+    padding-bottom: 30px;
+    background: linear-gradient(45deg, $blue, $span-red, $orange);
+    background-size: 600% 600%;
+    animation: AnimationName 10s ease infinite;
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px #333;
+    position: absolute;
+    transition: 0.5s;
+    &--hide {
+      opacity: 1;
+      left: 100%;
+    }
+    &--show {
+      opacity: 1;
+      left: 15%;
+      @include max-screen($breakpoint-mobile) {
+        left: 1%;
+      }
+    }
+    @include max-screen($breakpoint-mobile) {
+      width: 98%;
+    }
+  }
+  &__header {
+    padding: 10px;
+    text-align: center;
+    .Subtitle__Item {
+    }
+  }
+  &__title {
+    font-weight: lighter;
+    font-size: 23px;
+    color: #fff;
+    letter-spacing: 0.1em;
+    @include max-screen($breakpoint-mobile) {
+      font-size: 20px;
+    }
+    &--sub {
+      font-size: 15px;
+    }
+  }
+  &__content {
+    width: 30%;
+    margin: 0px auto;
+    @include max-screen($breakpoint-mobile) {
+      width: 80%;
+    }
+  }
+  &__description {
+    color: #fff;
+    font-size: 13px;
+    line-height: 25px;
+    span {
+      font-size: 18px;
+    }
+  }
+  &__list {
+    list-style: none;
+    li {
+      color: #fff;
+      line-height: 27px;
+    }
+  }
+  &__footer {
+    width: 50%;
+    margin: 20px auto;
+    text-align: center;
+    background: rgba(0, 0, 0, 0);
+    @include max-screen($breakpoint-mobile) {
+      width: 90%;
+    }
+  }
+  &__link {
+    color: #fff;
+    letter-spacing: 0.1em;
+    text-decoration: underline;
+    cursor: pointer;
+    display: inline-block;
+    margin: 0px 6px;
+  }
+  &__final {
+    color: $light-gray;
+    background: #ffffff;
+    box-shadow: 2px 2px 4px lighten($light-gray, 20%);
+    border-radius: 6px;
+    width: 15em;
+    margin: 0 auto 10px;
+    line-height: 40px;
+    cursor: pointer;
+  }
+  &__help-text {
+    margin-top: 10px;
+    font-size: 10px;
+    text-align: center;
+    color: #fff;
+    letter-spacing: 0.1em;
+  }
+}
+
+@keyframes AnimationName {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}

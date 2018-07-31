@@ -1,0 +1,5 @@
+.Textbook
+  .row
+    - @textbooks.each do |book|
+      - next if book.title.blank?
+      = render 'list_item', book: book

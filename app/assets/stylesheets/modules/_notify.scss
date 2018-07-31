@@ -1,0 +1,55 @@
+@import "common/color";
+@import "common/font";
+@import "media_queries";
+
+/*************
+通知欄
+**************/
+
+.Notify {
+  padding-left: 0px;
+  padding: 10px;
+  @include max-screen($breakpoint-tablet) {
+    max-height: 70vh;
+    overflow-y: scroll;
+  }
+  &__item {
+    font-size: 14px;
+    line-height: 24px;
+    border-bottom: 0.5px solid #eee;
+    padding: 10px 0px;
+    transition: 0.3s;
+    list-style: none;
+    a {
+      display: inline-block;
+      width: 100%;
+      color: $light-gray;
+    }
+    &:hover {
+      background-color: #eee;
+    }
+  }
+  &__unreaded {
+    background-color: lighten($light-blue, 50%);
+  }
+  &__icon {
+    color: $purple;
+  }
+  &__title {
+    font-weight: bold;
+    color: $gray;
+  }
+  &__help {
+    font-size: 10px;
+    @include max-screen($breakpoint-tablet) {
+      font-size: 12px;
+    }
+  }
+  &__time {
+    font-size: 10px;
+    line-height: 10px;
+    @include max-screen($breakpoint-tablet) {
+      font-size: 12px;
+    }
+  }
+}

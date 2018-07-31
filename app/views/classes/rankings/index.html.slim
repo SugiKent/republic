@@ -1,0 +1,23 @@
+h1.Page__title
+  | 学部別 人気授業ランキング
+
+p.Page__text
+  - if current_user.present?
+    | あなたと同じ学部の人が履修している人気授業ランキングです。
+  - else
+    | 全学部共通カリキュラムの人気授業ランキングです。
+    br
+    | ログインをすると、あなたの学部のランキングが閲覧できます。
+  br
+  - if params[:faculty_id].present?
+    | 全カリ 人気授業ランキングは
+    = link_to 'こちら', rankings_path
+
+h4.text-info
+  - if params[:faculty_id].present?
+    = current_user.faculty.faculty_name
+  - else
+    | 全学部共通カリキュラム
+
+.col-xs-12
+  = render 'classes/lesson/lessonmodule', lessons: @lessons, type: "#{controller_name}/#{action_name}"

@@ -1,0 +1,215 @@
+// Place all the styles related to the class/lesson controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "common/color";
+@import "common/font";
+@import "media_queries";
+
+.LessonModule {
+  &__container {
+    width: 100%;
+    position: relative;
+    overflow: scroll;
+    overflow-x: scroll;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+  }
+  &__carousel {
+    height: 100%;
+    overflow-x: visible;
+    white-space: nowrap;
+    padding-left: 0px;
+    // スクロールバーを消そうとしたが、消えない。
+    // 一応残しておく。
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    // スクロールバーの軌道
+    &::-webkit-scrollbar-track {
+      display: none;
+      background-color: rgba(0, 0, 0, 0);
+    }
+    // スクロールバーの動く部分
+    &::-webkit-scrollbar-thumb {
+      display: none;
+      background-color: rgba(0, 0, 0, 0);
+    }
+  }
+  &__col {
+    list-style-type: none;
+    width: 28%;
+    margin-right: 3%;
+    display: inline-block;
+    white-space: normal;
+    vertical-align: top;
+    overflow: hidden;
+    min-height: 100%;
+    @include max-screen($breakpoint-mobile) {
+      width: 80%;
+    }
+  }
+  &__list {
+    margin-bottom: 20px;
+    @include max-screen($breakpoint-mobile) {
+      margin-bottom: 0px;
+    }
+  }
+  &__block {
+    padding: 5px 10px 10px;
+    margin: 10px 5px 20px;
+    height: 100%;
+    border-radius: 8px;
+    color: $light-gray;
+    position: relative;
+    box-shadow: 0px 1px 6px 1px lighten($light-gray, 15%);
+    @include max-screen($breakpoint-mobile) {
+      margin: 8.5px 5px;
+    }
+    &--has-review {
+      box-shadow: 0px 1px 6px 1px lighten($orange, 30%);
+    }
+  }
+  &__has-review {
+    position: absolute;
+    top: 4px;
+    right: 6px;
+    border-radius: 0px 3px 0px 3px;
+    color: $orange;
+    width: 1em;
+    text-align: center;
+    transition: .3s;
+    font-size: 20px;
+    &:hover {
+      opacity: 0.3;
+    }
+  }
+  &__header {
+    width: 100%;
+    padding: 5px 5px 10px;
+  }
+  &__title {
+    color: $light-gray;
+    word-wrap: break-word;
+    font-size: 15px;
+    line-height: 18px;
+    letter-spacing: 0.1em;
+  }
+  &__item {
+    color: $light-gray;
+    word-wrap: break-word;
+    font-size: 13px;
+    line-height: 18px;
+  }
+  &__footer {
+    table {
+      .table-header{
+        background: $light-blue;
+        th {
+          color: #fff;
+          font-weight: lighter;
+          letter-spacing: 0.1em;
+          line-height: 18px;
+        }
+      }
+    }
+  }
+}
+
+.LessonDetail {
+  &__sns {
+    position: absolute;
+    left: -70px;
+    top: 250px;
+    @include max-screen($breakpoint-tablet) {
+      position: relative;
+      left: 0;
+      top: 0;
+      display: flex;
+      flex-flow: row-reverse;
+    }
+  }
+  &__header {
+    margin: 20px auto;
+    border: 2px solid $blue;
+    border-radius: 5px;
+    box-shadow: 1px 1px 4px 0px lighten($light-gray, 20%);
+ }
+  &__title {
+    background-color: $blue;
+  }
+  &__item {
+    padding: 1px 15px;
+    color: $white;
+    h1 {
+      font-size: 22px;
+      @include max-screen($breakpoint-mobile) {
+        font-size: 18px;
+      }
+    }
+  }
+  &__nav {
+    padding: 15px 0px;
+    margin-right: 10px;
+    .nav__item {
+      margin: 5px;
+      display: inline-block;
+    }
+  }
+  &__info {
+    padding: 10px;
+    h3 {
+      @include max-screen($breakpoint-mobile) {
+        font-size: 18px;
+      }
+    }
+  }
+  &__content {
+    margin: 10px;
+    border: 2px solid $light-blue;
+    border-radius: 5px;
+    .content__header {
+      background-color: $light-blue;
+      padding: 5px 0px;
+      .content__header-item {
+        padding: 0px 15px;
+        color: $white;
+      }
+    }
+    .table {
+      margin: 0px 10px 10px 0px;
+      th {
+        text-align: center;
+        @include max-screen($breakpoint-mobile) {
+          font-size: 12px;
+        }
+      }
+      td {
+        text-align: center;
+      }
+    }
+  }
+  &__review {
+    .lesson__review-title {
+      @include max-screen($breakpoint-mobile) {
+        font-size: 17px;
+      }
+    }
+    .lesson__review-content {
+      font-size: 13px;
+      line-height: 20px;
+    }
+  }
+  &__sp-responsive {
+    min-width: 100%;
+    overflow: auto;
+  }
+}
+
+.Search {
+  &__toggle {
+    display: none;
+    &--none {
+      display: block;
+    }
+  }
+}

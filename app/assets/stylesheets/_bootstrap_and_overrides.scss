@@ -1,0 +1,35 @@
+// Set correct font paths
+$glyphiconsEotPath: font-url("glyphicons-halflings-regular.eot");
+$glyphiconsEotPath_iefix: font-url("glyphicons-halflings-regular.eot?#iefix");
+$glyphiconsWoffPath: font-url("glyphicons-halflings-regular.woff");
+$glyphiconsTtfPath: font-url("glyphicons-halflings-regular.ttf");
+$glyphiconsSvgPath: font-url("glyphicons-halflings-regular.svg#glyphicons_halflingsregular");
+
+
+.container-fluid {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.container {
+  position: relative;
+  right: 0px;
+  transition: 0.5s;
+  @media (min-width: 1200px) {
+    // lgサイズになった時にレイアウト崩れをするため
+    width: 75%;
+  }
+}
+
+.glyphicon-lg {
+  font-size: 18px;
+  line-height: 18px;
+  position: relative;
+  top: 4px;
+}
+
+.table-fixedwidth {
+  .td-fixedwidth {
+    width: 80px;
+  }
+}

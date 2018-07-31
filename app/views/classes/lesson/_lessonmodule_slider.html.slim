@@ -1,0 +1,42 @@
+.LessonModule__container
+  ol.LessonModule__carousel
+    - lessons.each do |lesson|
+      li.LessonModule__col
+        - has_review = "--has-review" if lesson.results.first.present?
+        .LessonModule__block class="LessonModule__block#{has_review}"
+          - if lesson.results.first.present?
+            p.LessonModule__has-review
+              i.glyphicon.glyphicon-flash
+          .LessonModule__header
+            h3.LessonModule__title
+              = link_to lesson.lesson_name, lesson, onClick: "gtag('event', 'click', {'event_category': 'lesson', 'event_label': 'module_slider/#{type}'});"
+              | &nbsp;/&nbsp;
+              = lesson_campus_format(lesson.campus)
+            p.LessonModule__item
+              = lesson.faculty.faculty_name
+              | &nbsp;/&nbsp;
+              = lesson.department.department_name
+          .LessonModule__footer
+            table.table.table-condensed
+              tr.table-header
+                th
+                  | 講師名
+                th
+                  | 学期
+                th
+                  | コマ
+              tr
+                td
+                  = raw professor_name_link(lesson.professor_name)
+                td
+                  - case lesson.term
+                  - when 1
+                    = "春"
+                  - when 2
+                    = "秋"
+                  - when 3
+                    = "通年"
+                  - when 4
+                    = "その他"
+                td
+                  = lesson_period_format(lesson.period)

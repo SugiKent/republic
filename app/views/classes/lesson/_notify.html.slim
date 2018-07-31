@@ -1,0 +1,7 @@
+- if @lesson.lesson_detail.blank?
+  p.mT10.alert.alert-warning
+    | シラバス情報がありません。これは
+    = @lesson.year
+    | 年度の授業です。
+p.alert.alert-success
+  | 情報は最新ではない可能性があります。正確な情報はCampusmateを確認してください。

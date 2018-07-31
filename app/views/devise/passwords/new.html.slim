@@ -1,0 +1,18 @@
+.container
+  h2
+    | パスワードの再設定
+  .row
+    .col-sm-6.col-xs-12
+      = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+        = devise_error_messages!
+        .col-xs-12
+          .field.form-group
+            = f.label :email
+            br
+            = f.email_field :email, autofocus: true, class: 'form-control'
+        .col-xs-12
+          .actions
+            p
+              = f.submit "パスワードリセットのメールを送信", class: 'btn btn-success btn-go', data: { disable_with: "送信中..." }
+      .col-xs-12
+        = render "devise/shared/links"

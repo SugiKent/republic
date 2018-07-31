@@ -1,0 +1,31 @@
+@import "common/color";
+@import "common/font";
+@import "media_queries";
+
+/******
+フッター
+******/
+.Footer {
+  background-color: lighten($light-gray, 15%);
+  padding: 50px 10px;
+  transition: 0.5s;
+  position: relative;
+  right: 0px;
+  &__list {
+    padding-left: 0px;
+    &--item {
+      list-style: none;
+      font-size: 12px;
+      line-height: 30px;
+      a {
+        color: $white;
+      }
+    }
+  }
+  &--hide {
+    display: none;
+  }
+  &__title:hover {
+    color: #fff;
+  }
+}

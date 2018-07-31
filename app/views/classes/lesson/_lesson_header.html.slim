@@ -1,0 +1,73 @@
+.LessonDetail__header
+  .LessonDetail__title
+    .LessonDetail__item.pull-left
+      h1
+        = @lesson.lesson_name
+    - unless amp_ready?
+      .LessonDetail__nav.pull-right
+        = link_to "レビューを書く", new_lesson_result_path(@lesson), class: "btn btn-primary btn-go", onClick: "gtag('event', 'click', {'event_category': 'lesson', 'event_label': 'to_review'});"
+    .clearfix
+
+  .LessonDetail__info
+    .table-responsive
+      table.table
+        tr
+          th
+            | 年度
+          th
+            | 学部
+          th
+            | 学科
+          th
+            | 講師
+          th
+            | 学期
+          th
+            | コマ
+          th
+            | 教室
+          th
+            | キャンパス
+          th
+            | 備考
+          th
+            | URL
+        tr
+          td
+            = @lesson.year
+          td
+            = @lesson.faculty.faculty_name
+          td
+            = @lesson.department.department_name
+          td
+            = raw professor_name_link(@lesson.professor_name)
+          td
+            - case @lesson.term
+            - when 1
+              = "春"
+            - when 2
+              = "秋"
+            - when 3
+              = "通年"
+            - when 4
+              = "その他"
+          td
+            = lesson_period_format(@lesson.period)
+          td
+            = @lesson.classroom
+          td
+            - case @lesson.campus
+            - when 1
+              = "池袋"
+            - when 2
+              = "新座"
+            - when 3
+              = "その他"
+          td
+            - if @lesson.note.nil?
+              = @lesson.note
+            - else
+              = "特になし"
+          td
+            - url = @lesson.url
+            = link_to "Campusmateへ", url, { :target => "_blank"}

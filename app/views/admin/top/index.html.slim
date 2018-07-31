@@ -1,0 +1,64 @@
+.jumbotron
+  h1
+    span.glyphicon.glyphicon-home[aria-hidden="true"]
+    |  Hello, Admin!
+  .container
+    .row
+      .col-sm-3.col-xs-6
+        .panel.panel-info
+          .panel-heading
+            h4
+              | 現在のレビュー登録数
+          .panel-body
+            p
+              = @results
+      .col-sm-3.col-xs-6
+        .panel.panel-success
+          .panel-heading
+            h4
+              | 現在のユーザー登録数
+          .panel-body
+            p
+              = @users
+    .row
+      .col-sm-3.col-xs-6
+        .panel.panel-info
+          .panel-heading
+            h4
+              | 今日のレビュー数
+          .panel-body
+            p
+              = @result_today
+      .col-sm-3.col-xs-6
+        .panel.panel-warning
+          .panel-heading
+            h4
+              | 今日のログイン数
+          .panel-body
+            p
+              = @user_login_today
+    .row
+      .col-sm-3.col-xs-6
+        .panel.panel-info
+          .panel-heading
+            h4
+              | 昨日のレビュー登録数
+          .panel-body
+            p
+              = @result_yesterday
+      .col-sm-3.col-xs-6
+        .panel.panel-warning
+          .panel-heading
+            h4
+              | 昨日のログイン数
+          .panel-body
+            p
+              = @user_login_yesterday
+      .col-sm-3.col-xs-6
+        .panel.panel-success
+          .panel-heading
+            h4
+              | 昨日のユーザー登録数
+          .panel-body
+            p
+              = @user_yesterday

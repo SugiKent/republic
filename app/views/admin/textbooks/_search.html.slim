@@ -1,0 +1,24 @@
+.row
+  .col-xs-12
+    .panel.panel-primary
+      .panel-heading
+        h3.panel-title
+          | 検索項目
+      .panel-body
+        .row
+          .col-xs-12
+            - if flash[:searched].present?
+              = content_tag(:div, flash[:searched], class: "alert alert-success")
+
+        = form_tag(search_admin_textbooks_path, method: :get) do
+          .row
+            .form-group.col-xs-6.col-sm-3
+              = text_field_tag :title, params[:title], placeholder: 'タイトル', class: "form-control"
+            .form-group.col-xs-6.col-sm-3
+              = text_field_tag :author, params[:author], placeholder: '著者名', class: "form-control"
+            .form-group.col-xs-6.col-sm-2
+              = text_field_tag :publisher, params[:publisher], placeholder: '出版社', class: "form-control"
+            .form-group.col-xs-6.col-sm-2
+              = text_field_tag :published_year, params[:published_year], placeholder: '出版年', class: "form-control"
+            .form-group.col-xs-12.col-sm-1.text-right
+              = submit_tag '検索', class: "btn btn-success btn-go", data: { disable_with: "送信中..." }

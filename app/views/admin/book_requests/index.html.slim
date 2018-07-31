@@ -1,0 +1,29 @@
+.page-header
+  h3
+    | 教科書売買管理
+.row
+  .col-xs-12
+    .table-responsive
+      table.table.table-striped
+        tr
+          th
+            | ユーザー名
+          th
+            | 教科書
+          th
+            | マッチ状態
+        - @book_requests.each do |req|
+          tr
+            td
+              = req.request_user.try(:email)
+              = req.having_user.try(:email)
+              - txt = req.request_user.present? ? '　欲しい' : '　持っている'
+              = txt
+            td
+              strong
+                = link_to req.text_book.title, admin_textbook_path(req.text_book)
+              br
+              = link_to req.text_book.lessons.first.lesson_name, lesson_path(req.text_book.lessons.first)
+            td
+              = 'チャット開始済み' if req.matched_users.count > 0
+    = paginate @book_requests

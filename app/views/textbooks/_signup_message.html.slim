@@ -1,0 +1,7 @@
+- if current_user.blank?
+  p.alert.alert-warning
+    = link_to "ユーザー登録", new_user_registration_path
+    | を完了すると、教科書の売買が可能になります。
+    br
+    small
+      = link_to "ログインはこちら", new_user_session_path

@@ -1,0 +1,30 @@
+footer.Footer.full-width
+  .container
+    .row
+      .col-sm-6.col-xs-12
+        h4
+          = link_to "Rep立教大学シラバス検索システム", root_path, class: "text-white Footer__title", onClick: "gtag('event', 'click', {'event_category': 'footer', 'event_label': 'to_root'});"
+        ul.Footer__list
+          li.Footer__list--item
+            a href="https://twitter.com/rep_rikkyo?lang=ja" target="_blank" onClick="gtag('event', 'click', {'event_category': 'footer', 'event_label': 'to_twitter/rep'});"
+              | Rep公式Twitter
+          li.Footer__list--item
+            = link_to 'Repとは', about_path, onClick: "gtag('event', 'click', {'event_category': 'footer', 'event_label': 'to_about'});", data: {turbolinks: 'false'}
+          li.Footer__list--item
+            = link_to 'Repを支援する', '/about#Help', onClick: "gtag('event', 'click', {'event_category': 'footer', 'event_label': 'to_about/help'});", data: {turbolinks: 'false'}
+          li.Footer__list--item
+            = link_to "利用規約", term_path, onClick: "gtag('event', 'click', {'event_category': 'footer', 'event_label': 'to_term'});", data: {turbolinks: 'false'}
+          li.Footer__list--item
+            = link_to "プライバシーポリシー", term_privacy_path, onClick: "gtag('event', 'click', {'event_category': 'footer', 'event_label': 'to_privacy'});", data: {turbolinks: 'false'}
+          li.Footer__list--item
+            a href="https://twitter.com/sugiken_bike" onClick="gtag('event', 'click', {'event_category': 'footer', 'event_label': 'to_twitter/sugiken'});" target="_blank"
+              | 開発者Twitter
+      - unless amp_ready?
+        .col-sm-6.col-xs-12
+          .Footer__contact
+            = form_tag(notifies_path, method: "post") do
+              = text_area_tag :message, '', rows: 5, placeholder: "ご意見やご要望はこちらへ！\n返信が必要な場合はメールアドレスを付記してください。", class: 'form-control'
+              .mT5.pull-right
+                = submit_tag "送信", class: "btn btn-success btn-go", data: {turbolinks: 'false'}
+
+.hidden.js-GA__user data-user="#{current_user.present?}"

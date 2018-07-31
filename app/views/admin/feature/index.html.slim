@@ -1,0 +1,33 @@
+.page-header
+  h3
+    | 特集管理
+  .pull-right
+    = link_to "カテゴリー管理", admin_category_index_path
+.row
+  .col-xs-12
+    = link_to "新規作成", new_admin_feature_path, class: "btn btn-success"
+.row
+  .col-xs-12
+    .table-responsive
+      table.table.table-striped
+        tr
+          th
+            | タイトル
+          th
+            | 公開状態
+          th
+          th
+          th
+
+        - @features.each do |feature|
+          tr
+            td
+              = feature.title
+            td
+              = feature.published
+            td
+              = link_to "編集", edit_admin_feature_path(feature), class: "btn btn-success"
+            td
+              = link_to "詳細", admin_feature_path(feature), class: "btn btn-primary"
+            td
+              = link_to "確認", feature_path(feature)

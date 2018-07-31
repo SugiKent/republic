@@ -1,0 +1,13 @@
+header.Header
+  .row
+    .col-xs-12
+      = link_to admin_root_path do
+        p.Header__title.text-center
+          | Rep
+          span
+            | 管理画面
+      p
+        - if current_user.admin?
+          | Admin権限
+        - else
+          | Partner権限

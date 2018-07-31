@@ -1,0 +1,21 @@
+.row
+  .col-xs-12
+    - if @feature.image?
+      .thumbnail
+        = image_tag @feature.image.url
+.row
+  .col-xs-12
+    h2.bg-success.text-success
+      = @feature.title
+.row
+  .col-xs-12
+    p
+      = markdown(@feature.content).html_safe
+.row
+  .col-xs-6
+    .pull-left
+      = link_to "確認", feature_path(@feature)
+      br
+      = link_to "一覧へ", admin_feature_index_path
+    .pull-right
+      = link_to "編集", edit_admin_feature_path(@feature), class: "btn btn-primary"

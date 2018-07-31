@@ -1,0 +1,13 @@
+.Page__title
+  = @textbook.title
+
+= image_tag @textbook.large_image, style: "width: 200px;"
+
+.row.mT10.mB10
+  .col-xs-12
+    .Page__text
+      | この教科書が使われている授業
+    ul
+      - @textbook.lessons.each do |lesson|
+        li
+          = lesson.lesson_name

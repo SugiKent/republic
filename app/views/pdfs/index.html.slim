@@ -1,0 +1,52 @@
+ruby:
+  set_meta_tags title: "立教大学 時間割PDF作成", keywords: '立教, シラバス, 時間割, 日課表'
+  breadcrumb :pdf_index
+
+.Page
+  h1.Page__title
+    | オリジナル時間割作成
+  p.Page__text
+    | 学科を選択して、時間割のPDFを作成することができます。
+    br
+    | お気に入りに登録した授業も含めることができます。
+
+.row
+  .col-sm-8.col-xs-12.col-sm-offset-2
+    .alert.alert-info
+      | 時間割を作成する学期・学科をお選びください。（複数選択可）
+
+    .Pdf__selected-department
+
+    = form_tag(result_pdfs_path, method: :get) do
+      .row
+        .form-group.col-xs-12
+          .row
+            .col-xs-8
+              = select_tag 'term', options_for_select({"春学期"=>"1", "秋学期"=>"2", "通年"=>"3"}, {selected: params[:term]}), class: "form-control"
+            .col-xs-4
+              .text-right.mB10
+                .form-group
+                  = submit_tag "作成", class: "btn btn-success btn-go", data: { disable_with: "送信中..." }, onClick: "gtag('event', 'click', {'event_category': 'pdf', 'event_label': 'submit'});"
+          label.mB10 onClick="gtag('event', 'click', {'event_category': 'pdf', 'event_label': 'include_favorite'});"
+            input type='checkbox' value='true' class='Pdf__checkbox-block' name='favorites'
+              span.fntN.mL5
+                | お気に入り授業を含める
+          .panel-group#accordion role="tablist" aria-multiselectable="true"
+            - @faculties.each do |f|
+              .panel.panel-default
+                .panel-heading.curP role="tab" id="heading#{f.id}" data-toggle="collapse" data-parent="#accordion" data-target="#collapse#{f.id}" aria-expanded="true" aria-controls="collapse#{f.id}"
+                  h4.panel-title
+                    = f.faculty_name
+                    span.pull-right
+                      span.caret
+
+                .panel-collapse.collapse id="collapse#{f.id}" role="tabpanel" aria-labelledby="heading#{f.id}"
+                  .panel-body
+                    - f.departments.each do |d|
+                      .Pdf__checkbox-block.mL5
+                        label
+                          input type="checkbox" value="#{d.id}" class="Pdf__checkbox"
+                          span.fntN.mL5
+                            = d.department_name
+          = hidden_field_tag :department_ids
+          = hidden_field_tag :format, :pdf

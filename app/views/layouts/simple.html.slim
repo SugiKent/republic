@@ -1,0 +1,16 @@
+doctype html
+html
+  head
+    - if Rails.env == 'production'
+      = render 'share/analytics'
+    meta[name="viewport" content="width=device-width, initial-scale=1"]
+    = render 'share/icons'
+    = display_meta_tags default_meta_tags
+    = stylesheet_link_tag    'simple_template', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload', defer: true
+    = csrf_meta_tags
+  body
+    .container-fluid
+      - flash.each do |type, value|
+        = content_tag(:div, value, class: "alert bg-info alert-#{type}")
+      = yield

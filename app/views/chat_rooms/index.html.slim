@@ -1,0 +1,32 @@
+- breadcrumb :chat_rooms
+- set_meta_tags title: '掲示板一覧', description: "掲示板一覧です。Repの掲示板では誰でも簡単に5秒で掲示板が作成でき、投稿も自由です。さぁ君も立教生同士のコミュニティに飛び込もう！"
+
+.row
+  .col-xs-12
+    .pull-left
+      .Page
+        h1.Page__title
+          | 掲示板一覧
+    .pull-right
+      .alert.alert-success
+        = link_to "掲示板を作ろう！", new_chat_room_path, onClick: "gtag('event', 'click', {'event_category': 'chat_rooms', 'event_label': 'to_new_chat_room'});"
+        p.help-text
+          | ログイン不要で5秒で作れます！
+
+.row
+  - @rooms.each do |room|
+    .col-xs-12.col-sm-4
+      .LessonModule__block
+        h5
+          = link_to room.title.truncate(60), chat_room_path(room), onClick: "gtag('event', 'click', {'event_category': 'chat_rooms', 'event_label': 'to_chat_room/#{room.id}'});"
+        p
+          i.glyphicon.glyphicon-pencil
+          | &nbsp;
+          = room.posts.count
+        - if room.faculty.present?
+          p
+            i.glyphicon.glyphicon-tag
+            | &nbsp;
+            = room.faculty.faculty_name
+  .col-xs-12
+    = paginate @rooms

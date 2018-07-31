@@ -1,0 +1,175 @@
+- set_meta_tags title: 'とは'
+
+.About
+  .About__key
+    .Key
+      .Key__text
+        p
+          | MISSION
+        h1
+          | CREATE
+          br
+          | A RIKKYO WHERE
+          br
+          | EVERYONE LOVES.
+
+  .About__section
+    h2.About__title
+      | FOR RIKKYO STUDENTS
+
+    .Product
+      .Product__image
+        = image_tag 'about/mockup.png'
+      .Product__text
+        p
+          | 『Rep 立教大学シラバス検索システム』は立教生のために。
+          br
+          br
+          | 今までの時間割に100%満足していますか？
+          br
+          | Repを使えば、サクッと幸せな時間割が作れます。
+          br
+          br
+          | 立教生のあなたのためのサービスをぜひご利用ください。
+
+  .About__section
+    h2.About__title
+      | FUNCTIONS
+
+    .Product
+      .Product__detail-list
+        .Product__detail
+          = image_tag 'about/syllabus.png'
+          p
+            | Simple
+            br
+            small
+              | 最高に見やすいシラバス
+        .Product__detail
+          = image_tag 'about/search.png'
+          p
+            | Smooth
+            br
+            small
+              | サクサクな授業検索
+        .Product__detail
+          = image_tag 'about/review.png'
+          p
+            | Real
+            br
+            small
+              | 立教生の授業レビュー
+
+  .About__section
+    h2.About__title
+      | DEVELOPMENT
+
+    .About__dev
+      .About__chart
+        canvas#codeChart
+      .Product__text
+        h3
+          | Keep Growth.
+        p
+          br
+          | Repは日々アップデートされていきます。
+          br
+          | 今までに追加されたプログラムはレポート用紙にすると、なんと2万ページにもなります。
+
+  .About__section
+    h2.About__title
+      | TEAM
+
+    .Product
+      .Product__image
+        = image_tag 'about/sugiken.jpg'
+      .Product__text
+        p
+          | Repの99%は、立教生である
+          a href='https://twitter.com/sugiken_bike' onClick="gtag('event', 'click', {'event_category': 'aboutpage', 'event_label': 'to_twitter'});" target='_blank'
+            | 杉田賢人
+          | が開発しました。
+          br
+          | 立教生の目線で、「便利だな」を創ってきました。
+          br
+          br
+          | リリースから2年が経ち、これからは少数精鋭のメンバーで新たな価値を創り出していきます。
+          br
+          br
+          | 「Repに携わってみたい！」という方はお気軽にご連絡ください。
+
+  .About__section.About__section--alpha#Help
+    h2.About__title
+      | HELP
+
+    .Product
+      .Product__text.Product__text--large
+        h3
+          | Repは毎月飲み会4回分のコストと、カップ麺2000杯が出来上がるほどの時間をかけて運営しています。
+        p
+          br
+          br
+          | 継続的な運営のため、Amazonを利用して
+          small
+            a href='https://amzn.to/2yUrh1F' target='_blank' onClick="gtag('event', 'click', {'event_category': 'aboutpage', 'event_label': 'to_help/text'});"
+              | お金を使わずに、5分で1000円募金をする方法(＊)
+          | をご案内しています。
+          br
+          | ご協力お願いいたします🙇
+          br
+          br
+        small
+          | ＊リンクからPrime Studentに登録することで、以下の特典がご利用可能になるとても便利なサービスです。
+          br
+          | 報酬としてRepに1000円がAmazonから支払われる仕組みです。
+          br
+        = image_tag 'about/amazon_prime_student.jpg'
+        p
+          br
+          br
+          br
+          = link_to "Repに戻る", root_path, onClick: "gtag('event', 'click', {'event_category': 'aboutpage', 'event_label': 'to_root'});", data: {turbolinks: 'false'}
+
+
+javascript:
+  window.onload = function() {
+    var ctx = document.getElementById('codeChart').getContext("2d");
+
+    var gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
+    gradientStroke.addColorStop(0, '#d74690');
+    gradientStroke.addColorStop(1, '#ed9d7a');
+    ctx.canvas.height = 250;
+
+    var data = {
+      labels: ['2016/8', '2017/4', '2017/12', '2018/7'],
+      datasets: [{
+        label: '総開発量',
+        data: [0,210390,564391,776658],
+        borderColor: gradientStroke,
+        backgroundColor: gradientStroke,
+        pointBorderColor: '#fff',
+        pointBackgroundColor: gradientStroke,
+        pointHoverBackgroundColor: gradientStroke,
+        pointHoverBorderColor: gradientStroke,
+      }],
+    };
+
+    var complexChartOption = {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        yAxes: [{
+          ticks: {
+            display: false,
+            max: 1000000,
+            maxTicksLimit: 6,
+          },
+        }]
+       }
+    };
+    var codeChart = new Chart(ctx, {
+      type: 'line',
+      data: data,
+      options: complexChartOption
+    });
+  };

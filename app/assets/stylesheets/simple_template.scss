@@ -1,0 +1,11 @@
+@import "common/font";
+
+* {
+  margin: 0px;
+  padding: 0px;
+  font-family: $meiryo;
+}
+
+@import './simple_template/about';
+@import './simple_template/key';
+@import './simple_template/product';

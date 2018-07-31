@@ -1,0 +1,1 @@
+= select_tag('department_id', options_from_collection_for_select(Department.where(faculty_id: params[:faculty_id]), :id, :department_name, {selected: params[:department_id]}), prompt: '--指定なし--', class: 'form-control')

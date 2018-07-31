@@ -1,0 +1,133 @@
+ruby:
+  twitter_image_url = "https://placehold.jp/120/fefefe/328182/2400x1200.png?text=『#{@lesson.lesson_name}』%0A#{@lesson.professor_name}/#{@lesson.faculty.faculty_name}%0A%0A#{@lesson.lesson_detail.theme_subtitle if @lesson.lesson_detail.present?}&css=%7B%22text-align%22%3A%22%20left%22%2C%22padding-left%22%3A%22%2080px%22%2C%22line-height%22%3A%22%20180px%22%7D"
+  description = "『#{@lesson.lesson_name}』のシラバスです。詳細なシラバスと授業のレビューを見ることができます。#{@lesson.faculty.faculty_name}/#{@lesson.department.department_name}/#{@lesson.professor_name}/#{@lesson.lesson_detail.theme_subtitle if @lesson.lesson_detail.present?}"
+
+  canonical_url = @lesson.same_lessons.split(',').last == @lesson.id.to_s ? nil : "https://www.rep-rikkyo.com/lesson/#{@lesson.same_lessons.split(',').last}"
+
+  set_meta_tags title: "#{@lesson.lesson_name}のシラバス", description: description, canonical: canonical_url, og: {type: 'article', url: request.url}, twitter: {url: request.url, card: 'summary_large_image', image: twitter_image_url}
+
+  # 検索結果が存在する場合、最後の結果を。
+  # ない場合はから文字を。
+  searched_url = session[:search_history].present? ? session[:search_history] : ""
+  # previous_urlと今アクセスしてるURLが異なり、
+  # かつURLに"seach"という単語が含まれている時に検索結果のパンくずを出す。
+  if searched_url != request.fullpath && searched_url.include?("search")
+    search = lesson_search_condition(searched_url)
+    searched_link = searched_url
+    breadcrumb :lesson_show, @lesson, search, searched_link
+  else
+    breadcrumb :lesson_show, @lesson
+  end
+- if flash.present?
+  .row
+    .col-md-12.col-xs-12
+      - flash.each do |type, value|
+        = content_tag(:div, "", class: "alert bg-info alert-#{type}")
+          = value
+
+- if @current_year_lesson.present? && @lesson.year != 2018
+  p.alert.bg-danger.text-danger.mT10
+    | この授業は過去の授業です。最新の授業は、
+    = link_to "こちら", @current_year_lesson.first, onClick: "gtag('event', 'click', {'event_category': 'lesson', 'event_label': 'to_current_year_lesson'});"
+- elsif @lesson.year != 2018
+  p.alert.bg-danger.text-danger.mT10
+    | この授業は過去の授業です。2018年度に同名・同教授の開講はないようです。
+.LessonDetail
+  .LessonDetail__sns
+    a.Sns__btn.Sns__btn--twitter href="http://twitter.com/share?url=#{request.url}&text=『#{@lesson.lesson_name}』のシラバス%0D%0A#{@lesson.professor_name}%0D%0A#{@lesson.faculty.faculty_name}/#{@lesson.department.department_name}%0D%0A" target="_blank" onClick="gtag('event', 'click', {'event_category': 'lesson', 'event_label': 'sns/twitter'});"
+      | Twitter
+    br
+    a.Sns__btn.Sns__btn--line href="http://line.me/R/msg/text/?『#{@lesson.lesson_name}』のシラバスです。詳細なシラバスと授業のレビューを見ることができます。%0A#{@lesson.faculty.faculty_name}/#{@lesson.department.department_name}%0A#{@lesson.professor_name}%0A#{@lesson.lesson_detail.theme_subtitle if @lesson.lesson_detail.present?}%0A#{request.url}" target="_blank" onClick="gtag('event', 'click', {'event_category': 'lesson', 'event_label': 'sns/line'});"
+      | LINE
+  = render 'lesson_header'
+  = render 'syllabus'
+  = render 'review'
+  = render 'notify'
+- unless amp_ready?
+  .row
+    .col-md-3.col-xs-12.mT10
+      / @favosがあるならfavorite_buttonの基本viewを表示
+      / @favosが空ならfavorite_button_for_createを表示
+      div id="Favorite__button--#{@lesson.id}"
+        - if @favos.present?
+          = render 'classes/favorites/favorite_button', favos: @favos, lesson: @lesson, size: ""
+        - else
+          = render partial: "classes/favorites/favorite_button_for_create", locals: {lesson: @lesson, size: "md"}
+    .col-md-8.col-xs-12.mT10
+      a href="https://twitter.com/share?url=#{request.url}&text=『#{@lesson.lesson_name}』 を履修したことある方いませんか？ 立教大学授業レビュー共有サービス『Rep（@rep_rikkyo）』" class="btn btn-info" target="_blank" onClick="gtag('event', 'click', {'event_category': 'lesson', 'event_label': 'twitter/from_footer'});"
+        | レビューをお願いする
+
+    .col-xs-12
+      hr
+      h6
+        | お気に入りに登録すると・・・
+      h6.help-text
+        | お気に入りに登録した授業は、マイページから確認できます。
+        br
+        | また、
+        = link_to "時間割PDF作成", pdfs_path, onClick: "gtag('event', 'click', {'event_category': 'lesson', 'event_label': 'to_pdf_path/from_footer_message'});"
+        | から、お気に入り授業の時間割を作成できます！
+        br
+        | 気になった授業をどんどんお気に入りに登録して、後から見直すと便利です！
+      hr
+
+- if @tagged_lessons.present?
+  .Lesson__relative-lesson
+    h4.text-success
+      | 機械学習によるオススメ授業
+    = render 'lessonmodule_slider', lessons: @tagged_lessons, type: 'tagged_lesson'
+
+- elsif @relative_lessons.present?
+  .Lesson__relative-lesson
+    h4.text-success
+      | 関連授業
+    = render 'lessonmodule_slider', lessons: @relative_lessons, type: 'relative_lesson'
+
+- if @user_relative_lessons.present?
+  .Lesson__relative-lesson
+    h4.text-success
+      | この授業を履修した人は、こちらの授業も履修しています
+    = render 'lessonmodule_slider', lessons: @user_relative_lessons, type: 'user_relative_lesson'
+
+- unless amp_ready?
+  - if @lesson_history.present?
+    .Lesson__relative-lesson
+      h4.text-success
+        | あなたが閲覧したシラバス
+      = render 'lessonmodule_slider', lessons: @lesson_history, type: 'lesson_history'
+
+/ レビューを追加した直後であれば、モーダルを表示する
+- if flash[:success].present?
+  #resultCreatedModal.modal.fade.mT30 role="dialog" tabindex="-1"
+    .modal-dialog role="document"
+      .modal-content
+        .modal-header
+          button.close aria-label="Close" data-dismiss="modal" type="button"
+            span aria-hidden="true"  &times;
+          h4.modal-title.text-info
+            | レビューありがとうございます！🎉
+        .modal-body
+          .row
+            .col-xs-12.text-center.text-info
+              p
+                | レビューの数が
+              h1
+                = Result.count
+              p
+                | になりました！😆
+              .mT15
+                = image_tag 'illustration/cracker-bg.png', style: 'width:100%;'
+        .modal-footer
+          .row
+            .col-xs-12.text-left.text-info
+              h4
+                | Repを広めて、もっと便利に。
+              p
+                | Repは立教生の有志が開発しています。
+                br
+                | あなたの応援が力になります！
+          textarea.form-control disabled='true' rows="4"
+            = "Rep立教大学シラバス検索システムで『#{@lesson.lesson_name}』 のレビューを書きました！\n#{request.url}\n#Rep立教"
+          .text-center.mT15
+            a.btn.btn-info href="https://twitter.com/share?url=#{request.url}&text=Rep立教大学シラバス検索システムで『#{@lesson.lesson_name}』 のレビューを書きました！&hashtags=Rep立教" class="btn btn-info btn-sm" target="_blank" onClick="gtag('event', 'click', {'event_category': 'lesson', 'event_label': 'twitter/after_create_result/modal'});"
+              | シェアする

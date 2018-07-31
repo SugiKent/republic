@@ -1,0 +1,28 @@
+table.table.table-striped
+  tr
+    th
+      / 時限番号用
+    - days = {'a' => '月', 'b' => '火', 'c' => '水', 'd' => '木', 'e' => '金', 'f' => '土'}
+    - days.each do |key, value|
+      th
+        = value
+  - koma = 1
+  / 1限から7限まで回す。
+  - while koma < 8 do
+    tr
+      - days.each do |key, value|
+        - if key == 'a'
+          td
+            = koma
+        td
+          - lessons.get_by_period("#{key}_#{koma}").each do |lesson|
+            - d = lesson.department
+            - if d.department_name.match('文学科')
+              = d.department_name.match(/文学科(.+)/)[1][0..1]
+            - else
+              = d.department_name[0..1]
+            | &nbsp;
+            = link_to lesson.lesson_name, lesson_url(lesson)
+            br
+      - koma += 1
+  - koma = 1

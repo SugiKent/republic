@@ -1,0 +1,248 @@
+@import "common/color";
+@import "common/font";
+@import "media_queries";
+
+/******
+ヘッダー
+******/
+
+.js-fixed {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+.Header {
+  width: 100%;
+  height: 60px;
+  border-top: 2px solid $purple;
+  border-bottom: 2px solid lighten($light-gray, 30%);
+  background-color: $top-white;
+  a {
+    text-decoration: none;
+  }
+  p {
+    font-size: 15px;
+    letter-spacing: 0.2em;
+    line-height: 40px;
+    padding: 7.5px;
+    color: $light-gray;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  &--fixed {
+    position: fixed;
+    top: 0px;
+  }
+  &__title {
+    img{
+      height: 45px;
+      width: auto;
+      padding-right: 5px;
+    }
+  }
+  &__search {
+    width: 90%;
+    position: relative;
+    left: 10%;
+    margin: 11px auto;
+    display: inline-block;
+    @include max-screen($breakpoint-tablet) {
+      display: none;
+    }
+  }
+  &__icon-list {
+    margin-right: 15px;
+  }
+  &__item {
+    display: inline-block;
+    font-size: 15px;
+    letter-spacing: 0.2em;
+    line-height: 40px;
+    padding: 7.5px;
+    color: $light-gray;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  &__item a {
+    color: $light-gray;
+    font-size: 12px;
+    line-height: 40px;
+    padding: 7.5px;
+  }
+  &__pc-icon {
+    cursor: pointer;
+    &-menu {
+      color: $light-gray;
+      z-index: 999;
+      display: none;
+      width: 300px;
+      max-height: 500px;
+      overflow-y: scroll;
+      position: absolute;
+      top: 55px;
+      right: 30px;
+      background: #fff;
+      box-shadow: 1px 1px 3px 3px #b8b8b8;
+      &--feat {
+        right: 70px;
+        li {
+          line-height: 40px;
+          border-bottom: 0.5px dashed $white;
+        }
+      }
+      &--bell {
+        right: 50px;
+      }
+      &--menu {
+        li {
+          line-height: 40px;
+          border-bottom: 0.5px dashed $white;
+        }
+      }
+      li {
+        list-style: none;
+        user-select: none;
+        &:hover {
+          opacity: 0.7;
+        }
+        a {
+          color: $light-gray;
+          padding: 5px;
+          display: block;
+          width: 100%;
+          height: 100%;
+          i {
+            padding-right: 5px;
+          }
+        }
+      }
+    }
+  }
+  .mobile {
+    width: 100%;
+    .Header {
+      &__icons {
+        list-style: none;
+        position: absolute;
+        top: 12px;
+        right: 15px;
+        box-sizing: border-box;
+        display: flex;
+        margin-right: 10px;
+      }
+      &__menu-btn {
+        cursor: pointer;
+        font-size: 20px;
+        color: $light-gray;
+        margin-left: 25px;
+        margin-top: 3px;
+        &--account {
+          margin-top: 0px;
+          span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: $light-gray;
+            border-radius: 1px;
+            margin-top: 5px;
+            transition: 0.5s;
+          }
+        }
+        &--active {
+          color: $purple;
+          span {
+            background-color: lighten($light-gray, 10%);
+          }
+        }
+        &--top {
+          transform: rotate(-45deg);
+          position: relative;
+          top: 8px;
+        }
+        &--middle {
+          opacity: 0;
+        }
+        &--bottom {
+          transform: rotate(45deg);
+          position: relative;
+          bottom: 8px;
+        }
+      }
+      &__search-module {
+        width: 100%;
+        position: absolute;
+        top: 60px;
+        left: 0px;
+        display: none;
+        z-index: 99999;
+        background-color: #fff;
+        padding: 10px 8px;
+        box-shadow: 0px 8px 3px -3px #b8b8b8;
+      }
+      &__close {
+        width: 100%;
+        background-color: $light-gray;
+        color: #fff;
+        font-weight: bold;
+        font-size: 18px;
+        text-align: center;
+        margin-top: 8px;
+        i {
+          position: relative;
+          top: 2px;
+        }
+      }
+      &__menu {
+        width: 100%;
+        overflow-y: scroll;
+        position: fixed;
+        top: 60px;
+        bottom: 0px;
+        right: -100%;
+        transition: 0.5s;
+        background-color: #fff;
+        &--active {
+          z-index: 999;
+          top: 60px;
+          right: 0px;
+        }
+      }
+      &__list {
+        list-style-type: none;
+        margin: 20px auto;
+        padding-left: 20px;
+        li {
+          width: 100%;
+          line-height: 30px;
+          a {
+            color: $light-gray;
+            letter-spacing: 0.1em;
+            text-decoration: underline;
+            font-size: 15px;
+            line-height: 40px;
+            display: block;
+            width: 100%;
+          }
+        }
+      }
+      &__amp-link {
+        line-height: 58px;
+        position: relative;
+        right: 30px;
+        color: $light-gray;
+      }
+    }
+  }
+}
+
+// spでのヘッダーの動きに合わせて
+.slided {
+  position: relative;
+  right: 100%;
+  top: 72px;
+  opacity: 0;
+  z-index: -9999;
+}

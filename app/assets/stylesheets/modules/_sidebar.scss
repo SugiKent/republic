@@ -1,0 +1,84 @@
+@import "common/color";
+@import "common/font";
+@import "media_queries";
+
+.Sidebar {
+  @include max-screen($breakpoint-mobile) {
+    padding-top: 15px;
+    margin-top: 15px;
+    border-top: 1px dotted $blue;
+  }
+  &__title {
+    color: $blue;
+    margin-top: 20px;
+    margin-bottom: 5px;
+  }
+  &__image {
+    width: 100%;
+  }
+  &__status {
+    border-radius: 8px;
+    box-shadow: 0px 1px 6px $light-gray;
+    margin-bottom: 10px;
+    padding: 10px 0px 0px;
+  }
+  &__lesson {
+    padding: 10px 5px 5px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    box-shadow: 0px 1px 2px $light-gray;
+    display: block;
+    transition: 0.3s;
+    &:hover {
+      background-color: lighten($light-gray, 35%);
+      text-decoration: none;
+    }
+    &:first-child .Sidebar__badge {
+      background-color: $purple;
+    }
+    &:nth-child(2) .Sidebar__badge {
+      background-color: $light-blue;
+    }
+    &:nth-child(3) .Sidebar__badge {
+      background-color: $blue;
+    }
+  }
+  &__badge {
+    margin-right: 8px;
+    display: inline;
+  }
+  &__text {
+    color: $light-gray;
+    margin-top: 10px;
+  }
+  &__link {
+    display: inline;
+    &--feature {
+      padding: 8px;
+      line-height: 20px;
+      margin-bottom: 0px;
+    }
+  }
+  &__timeline {
+    margin: 0px auto 20px;
+    height: 450px;
+    overflow: scroll;
+    box-shadow: 3px 3px 6px 0px $light-gray;
+    @include max-screen($breakpoint-mobile) {
+      width: 85%;
+      margin: 0px auto 20px;
+    }
+  }
+  &__log {
+    border-bottom: 1px solid rgba($gray, 0.3);
+    color: $gray;
+    font-size: 12px;
+    padding: 15px 10px 0px;
+    &:hover {
+      background-color: #f5f8fa;
+    }
+    span {
+      font-size: 10px;
+    }
+  }
+}

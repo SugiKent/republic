@@ -1,0 +1,13 @@
+ul.nav.nav-pills.nav-stacked
+  - if controller_name != 'sessions'
+    li
+      = link_to "ログインはこちら", new_session_path(resource_name), onClick: "gtag('event', 'click', {'event_category': 'devise_links', 'event_label': 'to_login/from_#{controller_name}'});"
+  - if devise_mapping.registerable? && controller_name != 'registrations'
+    li
+      = link_to "ユーザー登録", new_registration_path(resource_name), onClick: "gtag('event', 'click', {'event_category': 'devise_links', 'event_label': 'to_signup/from_#{controller_name}'});"
+  - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
+    li
+      = link_to "パスワードをお忘れですか？", new_password_path(resource_name), onClick: "gtag('event', 'click', {'event_category': 'devise_links', 'event_label': 'to_forget_pass/from_#{controller_name}'});"
+  - if devise_mapping.confirmable? && controller_name != 'confirmations'
+    li
+      = link_to "登録確認メールが届かない方はこちら", new_confirmation_path(resource_name), onClick: "gtag('event', 'click', {'event_category': 'devise_links', 'event_label': 'to_resend_mail/from_#{controller_name}'});"

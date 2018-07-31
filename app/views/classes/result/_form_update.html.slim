@@ -1,0 +1,5 @@
+= form_for @result, :url => { :controller => :result, :action => :update } do |f|
+  .row
+    .col-xs-12
+      = link_to '戻る', mypage_path
+  = render partial: 'formmodule', locals: { f: f }

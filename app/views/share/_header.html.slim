@@ -1,0 +1,34 @@
+header.Header
+  .row
+    .col-md-4.col-xs-2.pull-left
+      = link_to root_path, onClick: "gtag('event', 'click', {'event_category': 'Header', 'event_label': 'to_top/by_icon_image'});", data: {turbolinks: "false"} do
+        p.Header__title
+          = image_tag "rep-origin.png", width: '61px', height: '48.8775px'
+          span.hidden-xs.hidden-sm
+            | 立教大学シラバス検索システム
+    .col-md-4.col-xs-8
+
+    - unless amp_ready?
+      .col-md-4.col-xs-2
+        nav.pull-right
+          .hidden-lg.hidden-md.mobile
+            ul.Header__icons
+              - if user_signed_in?
+                li.Header__menu-btn data-type="bell"
+                  i.glyphicon.glyphicon-bell
+              li.Header__menu-btn.Header__menu-btn--account data-type="account"
+                span
+                span
+                span
+              = render 'share/menus/menu_sp'
+          .hidden-sm.hidden-xs
+            = render 'share/menus/menu_pc'
+
+  - unless amp_ready?
+    .hidden-lg.hidden-md.mobile
+      - if user_signed_in?
+        .Header__search-module.js-Header__modal data-type='bell'
+          = render 'share/menus/notifications'
+          button.Header__close.js-Header__close
+            i.glyphicon.glyphicon-remove
+            | &nbsp;閉じる

@@ -1,0 +1,71 @@
+.row.mB30
+  - lessons.each do |lesson|
+    .col-md-4.col-sm-6.col-xs-12.LessonModule__list.js-LessonModule__item
+      - same_lesson_ids = lesson.same_lessons.split(',')
+      - has_result = same_lesson_ids.map{|id| @result_ids.include?(id.to_i) }.any?
+      - has_review = "--has-review" if has_result
+      .LessonModule__block class="LessonModule__block#{has_review}"
+        - if has_result
+          p.LessonModule__has-review
+            i.glyphicon.glyphicon-flash
+        .LessonModule__header
+          h3.LessonModule__title
+            = link_to lesson.lesson_name, lesson, onClick: "gtag('event', 'click', {'event_category': 'lesson', 'event_label': 'module/#{type}'});"
+            | &nbsp;/&nbsp;
+            = lesson_campus_format(lesson.campus)
+          p.LessonModule__item
+            = lesson.faculty.faculty_name
+            | &nbsp;/&nbsp;
+            = lesson.department.department_name
+        .LessonModule__footer
+          table.table.table-condensed
+            tr.table-header
+              th
+                | 講師名
+              th
+                | 学期
+              th
+                | コマ
+              th
+                | 教室
+            tr
+              td
+                = raw professor_name_link(lesson.professor_name)
+              td
+                - case lesson.term
+                - when 1
+                  = "春"
+                - when 2
+                  = "秋"
+                - when 3
+                  = "通年"
+                - when 4
+                  = "その他"
+              td
+                = lesson_period_format(lesson.period)
+              td
+                = lesson.classroom
+        .LessonModule__footer.table-responsive
+          table.table.table-condensed
+            - lesson.evaluations.each do |eva|
+              tr
+                td.mw60.success.text-success
+                  = eva.kind.match(/(.+)\(/)[1]
+                td.mw60
+                  = eva.percent
+                  | %
+                td.hidden-sm.hidden-md.hidden-lg
+                  = eva.content
+        - unless amp_ready?
+          - if user_signed_in?
+            div.js-LessonModule__tooltip id="Favorite__button--#{lesson.id}" data-toggle="tooltip" data-placement="bottom" title='気になる授業はココをクリック！お気に入り授業をまとめて時間割にもできます！' data-template='<div class="tooltip col-xs-10 mL10" role="tooltip"><div class="tooltip-arrow" style="background-color: #fff;border-bottom-color:#e44f4f;left:25%;"></div><div class="tooltip-inner" style="background-color: #fff;border:1px solid #e44f4f;color:#e44f4f;"></div></div>'
+              - if @favos.present?
+                = render 'classes/favorites/favorite_button', favos: @favos, lesson: lesson, size: "sm"
+              - else
+                = render partial: "classes/favorites/favorite_button_for_create", locals: {lesson: lesson, size: "sm"}
+          / - else
+          /   div.js-LessonModule__tooltip id="Favorite__button--#{lesson.id}" data-toggle="tooltip" data-placement="bottom" title='お気に入り機能を使うためにはログインが必要です！ログインをしてください！' data-template='<div class="tooltip col-xs-10 mL10" role="tooltip"><div class="tooltip-arrow" style="background-color: #fff;border-bottom-color:#e44f4f;left:25%;"></div><div class="tooltip-inner" style="background-color: #fff;border:1px solid #e44f4f;color:#e44f4f;"></div></div>'
+          /     - if @favos.present?
+          /       = render 'classes/favorites/favorite_button', favos: @favos, lesson: lesson, size: "sm"
+          /     - else
+          /       = render partial: "classes/favorites/favorite_button_for_create", locals: {lesson: lesson, size: "sm"}

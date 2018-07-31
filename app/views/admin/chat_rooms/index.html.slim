@@ -1,0 +1,28 @@
+.page-header
+  h3
+    | チャットルーム管理
+.row
+  .col-xs-12
+    .table-responsive
+      table.table.table-striped
+        tr
+          th
+            | ルーム名
+          th
+
+          th
+
+          th
+
+        - @chat_rooms.each do |cr|
+          tr
+            td
+              = link_to cr.title, chat_room_path(cr)
+            td
+              = link_to "編集", edit_admin_chat_room_path(cr), class: "btn btn-success"
+            td
+              - word = cr.published ? '公開中' : '非公開中'
+              = link_to word, admin_chat_room_toggle_published_path(cr), class: 'btn btn-info', data: { confirm: 'いいですか？' }, method: :post
+            td
+              = link_to "削除", admin_chat_room_path(cr), method: :delete, data: { confirm: '本当に削除しますか？'}, class: "btn btn-danger"
+= link_to "登録", new_admin_chat_room_path, class: "btn btn-info"

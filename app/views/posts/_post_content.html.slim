@@ -1,0 +1,10 @@
+table.table.table-striped
+  - @room.posts.each_with_index do |post, i|
+    tr
+      td
+        = i+1
+        | &nbsp;:&nbsp;
+        span
+        = link_to post.created_at.to_s(:created_at), "#{chat_room_path(@room) + '#' + post.created_at.to_s(:created_at)}", id: "#{post.created_at.to_s(:created_at)}", onClick: "gtag('event', 'click', {'event_category': 'post', 'event_label': 'time_stamp'});"
+        .mT5.mB5
+          = simple_format(h(post.content), class: "Post__text")

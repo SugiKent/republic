@@ -1,0 +1,41 @@
+.page-header
+  h3
+    | ユーザー管理
+    br
+    | 【
+    = @user.email
+    | 】
+.row
+  .col-xs-12
+    .table-responsive
+      table.table.table-striped
+        tr
+          th
+            | 授業ID
+          th
+            | 授業名
+          th
+            | コメント
+          th
+            = t('attributes.rep_1')
+          th
+            = t('attributes.rep_2')
+          th
+            = t('attributes.rep_3')
+          th
+        - @user.results.each do |result|
+          tr
+            td
+              = link_to result.lesson.id, lesson_path(result.lesson)
+            td
+              = result.lesson.lesson_name
+            td
+              = result.comment
+            td
+              = result.rep_1
+            td
+              = result.rep_2
+            td
+              = result.rep_3
+            td
+              = link_to "削除", admin_result_path(result), method: :delete, data: { confirm: '本当に削除しますか？'}, class: "btn btn-danger"

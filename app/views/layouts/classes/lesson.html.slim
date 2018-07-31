@@ -1,0 +1,42 @@
+- if request.format == :amp
+  / AMPの場合、AMP用HTMLをStringで取得
+  - amp_html = render 'layouts/classes/lesson'.to_s
+  / onClickと、インラインcssのコメントを削除してhtmlとしてレンダリング
+  - if Rails.env.development?
+    = amp_html.gsub(/onClick="[^"]*"\s{1}/, '').html_safe
+  - else
+    = amp_html.gsub(/onClick="[^"]*"\s{1}/, '').gsub(/\*.*\*/, '').html_safe
+- else
+  doctype html
+  html
+    head
+      - if Rails.env == 'production'
+        = render 'share/analytics'
+      - if @has_amp
+        - amp_uri = URI.parse(request.url)
+        - amp_uri.path = "#{amp_uri.path}.amp"
+        - amp_uri.query = h(amp_uri.query) if amp_uri.query.present?
+        link rel="amphtml" href = amp_uri.to_s.html_safe
+      meta[name="viewport" content="width=device-width, initial-scale=1"]
+      = render 'share/icons'
+      = display_meta_tags default_meta_tags
+      = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+      = javascript_include_tag 'application', 'data-turbolinks-track': 'reload', defer: true
+      = csrf_meta_tags
+    body
+      .wrap
+        = render 'share/header'
+        .container
+          - if request.fullpath == '/'
+            = render 'share/banner_menu'
+          .row
+            .col-md-9.col-xs-12
+              .mT5.mB10
+                - gretel = breadcrumbs style: :bootstrap
+                = gretel.to_s
+              = yield
+            .col-md-3.col-xs-12
+              = render 'share/sidebar'
+        = render 'share/footer'
+
+      = render 'share/add_home'

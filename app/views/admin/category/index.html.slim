@@ -1,0 +1,28 @@
+.page-header
+  h3
+    | カテゴリー管理
+.row
+  .col-xs-12
+    .table-responsive
+      table.table.table-striped
+        tr
+          th
+            | カテゴリー名
+          th
+
+          th
+          
+          th
+
+        - @categories.each do |category|
+          tr
+            td
+              = category.name
+            td
+              = link_to "編集", edit_admin_category_path(category), class: "btn btn-success"
+            td
+              - word = category.published ? '公開' : '非公開'
+              = link_to word, admin_category_toggle_published_path(category), class: 'btn btn-info', data: { confirm: 'いいですか？' }, method: :post
+            td
+              = link_to "削除", admin_category_path(category), method: :delete, data: { confirm: '本当に削除しますか？'}, class: "btn btn-danger"
+= link_to "登録", new_admin_category_path, class: "btn btn-info"

@@ -1,0 +1,43 @@
+.Sidebar
+  - if user_signed_in?
+    .Sidebar__status.hidden-xs.hidden-sm
+      = render 'share/users/status'
+  - if current_user.present?
+    .Sidebar__title
+      h4
+        = link_to rankings_path(faculty_id: current_user.faculty_id) do
+          = current_user.faculty.faculty_name
+          br
+          | 人気授業ランキング
+    .Sidebar__list
+      / - cache @faculty_ranking_lessons, expires_in: 1.days do
+      - @faculty_ranking_lessons.each.with_index(1) do |lesson, i|
+        - cache lesson do
+          = render 'share/sidebar/lesson', lesson: lesson, i: i, type: 'faculty'
+  .Sidebar__title
+    h4
+      = link_to rankings_path do
+        | 全カリ
+        br
+        | 人気授業ランキング
+  .Sidebar__list
+    / - cache @ranking_lessons, expires_in: 1.days do
+    - @ranking_lessons.each.with_index(1) do |lesson, i|
+      = render 'share/sidebar/lesson', lesson: lesson, i: i, type: 'zenkari'
+  .Sidebar__list
+    .row
+      .col-xs-6.col-md-12
+        = link_to pdfs_path, onClick: "gtag('event', 'click', {'event_category': 'sidebar', 'event_label': 'to_pdfs'});" do
+          = image_tag 'menus/to_pdf.png', class: 'Sidebar__image'
+      .col-xs-6.col-md-12
+        = link_to class_rooms_path, onClick: "gtag('event', 'click', {'event_category': 'sidebar', 'event_label': 'to_class_rooms'});" do
+          = image_tag 'menus/to_classroom.png', class: 'Sidebar__image'
+
+  .Sidebar__list
+    - @sidebar_features.each do |feature|
+      = link_to feature_path(feature), class: "Sidebar__lesson", onClick: "gtag('event', 'click', {'event_category': 'sidebar', 'event_label': 'feature_article'});" do
+        |  <img src="
+        = feature.image.url
+        | " alt="" class="Sidebar__image" />
+        p.Sidebar__link.Sidebar__link--feature
+          = feature.title

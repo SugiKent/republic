@@ -1,0 +1,6 @@
+.page-header
+  h3
+    | カテゴリーを編集
+= form_for @category, :url => { :controller => :category, :action => :update } do |f|
+  = render 'form', f: f
+= link_to 'Back', admin_category_index_path, class: "btn btn-default"

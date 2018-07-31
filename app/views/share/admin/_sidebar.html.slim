@@ -1,0 +1,47 @@
+ul.nav.nav-pills.nav-stacked.hidden-xs[role="navigation"]
+  li
+    = link_to "トップ", admin_root_path
+  li
+    = link_to "授業管理", admin_lesson_index_path
+  li
+    = link_to "レビュー", admin_result_index_path
+  li
+    = link_to "教科書管理", admin_textbooks_path
+  li
+    = link_to "教科書リクエスト", admin_book_requests_path
+  li
+    = link_to "特集", admin_feature_index_path
+  li
+    = link_to "ユーザー", admin_user_index_path
+  li
+    = link_to "掲示板管理", admin_chat_rooms_path
+  li
+    = link_to "学部管理", admin_faculty_index_path
+  li
+    = link_to "学科管理", admin_department_index_path
+ul.nav.nav-tabs.nav-justified.hidden-lg.hidden-md.hidden-sm
+  li.dropdown
+    a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"
+      | メニュー
+      span class="caret"
+    ul.dropdown-menu
+      li
+        = link_to "トップ", admin_root_path
+      li
+        = link_to "授業管理", admin_lesson_index_path
+      li
+        = link_to "レビュー", admin_result_index_path
+      li
+        = link_to "教科書管理", admin_textbooks_path
+      li
+        = link_to "教科書リクエスト", admin_book_requests_path
+      li
+        = link_to "特集", admin_feature_index_path
+      li
+        = link_to "ユーザー", admin_user_index_path
+      li
+        = link_to "掲示板管理", admin_chat_rooms_path
+      li
+        = link_to "学部管理", admin_faculty_index_path
+      li
+        = link_to "学科管理", admin_department_index_path

@@ -1,0 +1,2 @@
+module Class::TopHelper
+end

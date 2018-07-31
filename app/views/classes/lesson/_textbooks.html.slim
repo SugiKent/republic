@@ -1,0 +1,59 @@
+- if textbook_lessons.present?
+  .Syllabus__table.table-responsive
+    table.table
+      tr
+        th
+        th
+          | タイトル
+        th
+          | 著者名
+        th
+          | 出版社
+        th
+          | ISBN
+      - textbook_lessons.each do |tbl|
+        tr
+          - unless amp_ready?
+            td
+              = image_tag tbl.text_book.medium_image if tbl.text_book.medium_image.present?
+          td
+            = tbl.text_book.title
+            - if tbl.text_book.book_stores.present? && current_user.present?
+              .alert.alert-info.mT20
+                - if tbl.text_book.book_requests.pluck(:request_user_id).include?(current_user.id)
+                  / この教科書にすでにリクエストしている場合
+                  | すでに教科書をリクエスト済みです。
+                  br
+                  | 通常48時間以内にメールが送られます。
+                - elsif tbl.text_book.book_stores.pluck(:is_sold).all?
+                  / Repの在庫が完売している場合
+                  | Repの在庫は完売しました。
+                - else
+                  / Repの在庫がある場合
+                  strong
+                    = link_to "Repから購入", ship_textbooks_path(id: tbl.text_book, request_user: current_user), method: :post, onClick: "gtag('event', 'click', {'event_category': 'lesson/textbook', 'event_label': 'buy_from_rep'});"
+                    br
+                    | 定価の50%引きで販売中！
+            - elsif tbl.text_book.book_stores.present?
+              .alert.alert-info.mT20
+                strong
+                  | Repに在庫あり！
+                  br
+                  | ログインするとRepの中古教科書を購入可能です。
+                  br
+                  | 50%引きで販売中！
+            - if tbl.text_book.amazon_page.present?
+              .alert.alert-warning.mT20
+                strong
+                  = link_to "Amazonで購入", tbl.text_book.amazon_page, target: '_blank', onClick: "gtag('event', 'click', {'event_category': 'lesson/textbook', 'event_label': 'to_amazon_detail_page'});"
+                br
+                | ＊買い間違えにご注意ください。
+          td
+            = tbl.text_book.author
+          td
+            = tbl.text_book.publisher
+          td
+            - if tbl.text_book.isbn.present?
+              = tbl.text_book.isbn
+            - else
+              = tbl.text_book.amazon_isbn

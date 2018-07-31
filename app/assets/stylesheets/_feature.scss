@@ -1,0 +1,127 @@
+@import "common/color";
+@import "common/font";
+@import "media_queries";
+
+.Feature {
+  margin: 10px auto;
+  padding: 50px;
+  box-shadow:0px 1px 6px $light-gray;
+  @include max-screen($breakpoint-mobile) {
+    padding: 10px 7px;
+    box-shadow:0px 0px 10px;
+  }
+  &__header {
+    width: 100% !important;
+    height: 400px;
+    background-repeat: no-repeat;
+    background-position: center;
+    text-align: center;
+    position: relative;
+    @include max-screen($breakpoint-mobile) {
+      height: 250px;
+      background-size: contain;
+    }
+  }
+  &__title {
+    font-weight: bold;
+    color: $purple;
+    font-size: 20px;
+    display: inline-block;
+  }
+  &__date {
+    font-size: 15px;
+    display: inline-block;
+    margin-left: 15px;
+    color: $light-gray;
+  }
+  &__tag {
+    font-size: 12px;
+    margin-right: 5px;
+    border-radius: 3px;
+    background-color: $light-gray;
+    color: $white;
+    padding: 5px;
+  }
+  &__thumbnail {
+    width: 100%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    img {
+      width: 100%;
+      transition: 0.4s;
+      &:hover {
+        opacity: 0.8;
+        transform: scale3d(1.5,1.5,1.5);
+      }
+    }
+    p {
+      width: 100%;
+      text-align: left;
+      position: absolute;
+      bottom: 0;
+      line-height: 20px;
+      padding: 8px;
+      margin-bottom: 0px;
+      font-size: 15px;
+      background-color: rgba($white, 0.8);
+    }
+  }
+  &__content {
+    padding-top: 30px;
+    border-top: 1px dotted $purple;
+    h1 {
+      color: $blue;
+      font-size: 18px;
+      height: 40px;
+      display: inline-block;
+      letter-spacing: .05em;
+      font-weight: bold;
+      margin: 15px auto;
+      &::before {
+        content: "";
+        width: 7px;
+        height: 100%;
+        background-color: $blue;
+        display: inline-block;
+        position: relative;
+        top: -3px;
+        vertical-align: middle;
+        margin-right: 15px;
+      }
+    }
+    h2 {
+      color: $blue;
+      font-size: 16px;
+      margin: 5px auto 20px;
+      padding-bottom: 10px;
+      transition: .3s;
+      a {
+        &:hover {
+          opacity: 0.8;
+        }
+        &::after {
+          content: "\002192 授業ページへ";
+          display: inline-block;
+          font-size: 14px;
+          vertical-align: middle;
+          margin-left: 10px;
+        }
+      }
+    }
+    h3 {
+      color: $light-blue;
+      font-size: 14px;
+      margin: 25px auto 10px;
+    }
+    h4 {
+      color: $orange;
+      margin-left: 15px;
+    }
+    p {
+      font-size: 13px;
+      line-height: 25px;
+      color: $light-gray;
+    }
+  }
+}

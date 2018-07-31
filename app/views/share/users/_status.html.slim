@@ -1,0 +1,25 @@
+.Status
+  .Status__block.Status__block--line
+    - results_count = current_user.results.count
+    p.Status__title
+      | レビュー数ランキング
+    .Status__review
+      | レビュー数：
+      span
+        = results_count
+    .Status__rank
+      .Status__number
+        - rank = set_rank(results_count)
+        span.Status__count
+          = rank
+        span
+          | 位
+
+  .Status__block.Status__block--favorite
+    p.Status__review
+      | お気に入り授業数：
+      span
+        = current_user.favorites.count
+
+    p.Status__favorites
+      = link_to "お気に入りの授業で時間割を作る", pdfs_path, onClick: "gtag('event', 'click', {'event_category': 'Status', 'event_label': 'to_pdfs_by_favo'});"

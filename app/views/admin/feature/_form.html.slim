@@ -1,0 +1,46 @@
+.row.center-block
+  .col-xs-7
+    .form-group.col-xs-12
+      label.form-label
+        | タイトル
+      = f.text_field :title, class: "form-control"
+    .form-group.col-xs-12
+      label.form-label
+        | 内容
+      = f.text_area :content, rows: 20, class: "form-control"
+    .form-group.col-md-6.col-xs-12
+      label.form-label
+        | 公開状態
+      = f.select :published, {'公開' => true, '非公開' => false}, class: "form-control"
+  .col-xs-5
+    .form-group.col-xs-12
+      - if @feature.image?
+        .thumbnail
+          = image_tag @feature.image.url
+      br
+      = f.label :image
+      br
+      = f.file_field :image
+      = f.hidden_field :image_cache
+    .form-group.col-xs-12
+      - if @feature.persisted? && @feature.image?
+        label
+          = f.check_box :remove_image
+          | 画像を削除
+    .form-group.col-xs-12
+      label.form-label
+        | カテゴリー
+      br
+      = f.collection_check_boxes(:category_ids, Category.published.all, :id, :name) do |b|
+        = b.label { b.check_box + b.text }
+        br
+    .form-group.col-xs-12
+      label.form-label
+        | 学科
+      br
+      = f.collection_check_boxes(:faculty_ids, Faculty.all, :id, :faculty_name) do |b|
+        = b.label { b.check_box + b.text }
+        br
+.row
+  .col-md-6.col-xs-12
+    = f.submit class: "btn btn-success"

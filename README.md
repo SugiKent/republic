@@ -2,10 +2,10 @@
 
 ![Rep](https://user-images.githubusercontent.com/15076603/43436692-80f43430-94c0-11e8-8931-1b819a093065.png)
 
-このリポジトリは[Rep](https://www.rep-riiyko.com)の公開できる部分をさらけ出したリポジトリです。
-あくまでプログラミングの勉強やRailsでの開発の **参考** 程度に利用してください。
+このリポジトリは[Rep](https://www.rep-riiyko.com)の公開できる部分をさらけ出したリポジトリです。  
+あくまでプログラミングの勉強やRailsでの開発の **参考** 程度に利用してください。  
 
-2018/07/31の段階でのコードであり、更新はあまりしません。
+2018/07/31の段階でのコードであり、更新はあまりしません。  
 
 # プログラミングの勉強をしている方へ
 
@@ -28,11 +28,12 @@
 
 # MIT
 
-Repで重要なのは、今まで築いた立教大学生に対する知名度と、シラバス検索を支える2万を超える授業データ、そして何より大切なのは立教生によって入力された授業のレビューです。そのためMITライセンスで公開します。
+Repで重要なのは、今まで築いた立教大学生に対する知名度と、シラバス検索を支える2万を超える授業データ、そして何より大切なのは立教生によって入力された授業のレビューです。  
+そのため、それらが含まれないソフトウェア部分はMITライセンスで公開します。
 
-Copyright (c) 2018 Kento Sugita
-Released under the MIT license
-https://opensource.org/licenses/mit-license.php
+Copyright (c) 2018 Kento Sugita  
+Released under the MIT license  
+https://opensource.org/licenses/mit-license.php  
 
 # さいごに
 

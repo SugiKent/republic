@@ -32,8 +32,10 @@ Repで重要なのは、今まで築いた立教大学生に対する知名度�
 そのため、それらが含まれないソフトウェア部分はMITライセンスで公開します。
 
 Copyright (c) 2018 Kento Sugita  
-Released under the MIT license  
+Released under the MIT license  （＊）
 https://opensource.org/licenses/mit-license.php  
+
+＊このリポジトリ内の画像（png, jpeg, jpg, ico形式のファイル）は個人商用共に利用禁止。
 
 # さいごに
 

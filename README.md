@@ -9,7 +9,7 @@
 
 # プログラミングの勉強をしている方へ
 
-- まずは[Rep](https://www.rep-riiyko.com)を見てみてください
+- まずは[Rep](https://www.rep-rikkyo.com/)を見てみてください
 - 気になる機能がありますか？ `config/routes.rb` を見て、その機能のURLはどのcontrollerか把握しましょう
 - 該当controllerの該当アクション内を理解しましょう。わからないメソッドがあればgrepや全文検索で定義元を見つけましょう。
 - 該当viewを見ましょう。

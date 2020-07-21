@@ -36,9 +36,3 @@ Released under the MIT license（＊）
 https://opensource.org/licenses/mit-license.php  
 
 ＊このリポジトリ内の画像（png, jpeg, jpg, ico形式のファイル）は個人目的・商用目的共に利用禁止。
-
-# さいごに
-
-> この芝居がお気に召したのなら、どうか拍手喝采を
-
-Starをいただけると嬉しいです☺️
